@@ -2,8 +2,13 @@ import React from 'react'
 
 const Header = () => {
     return (
-        <div>
+        <div className='flex justify-evenly'>
             <h1 className="text-2xl">Welcome User</h1>
+            <div className="avatar right-0 relative">
+                <div className="w-10 rounded-full">
+                    <img src='.../public/next.svg' alt='User'/>
+                </div>
+            </div>
         </div>
     )
 }
