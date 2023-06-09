@@ -26,6 +26,7 @@ const Sidebar = () => {
                                 <Link href='/'><h1 className='text-2xl font-medium cursor-pointer'>BlogEvent</h1></Link>
                             </div>
                         </div>
+                        <div className='divider'></div>
                         <div className='flex flex-col items-start gap-2 mt-3'>
                             <Link href='/blog/create' className='text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap'><h1>Create Blog</h1></Link>
                             <Link href='/blog/view' className='text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap'><h1>View Blogs</h1></Link>
