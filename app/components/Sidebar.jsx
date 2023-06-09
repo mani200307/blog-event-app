@@ -7,11 +7,11 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 const Sidebar = () => {
 
     return (
-        <div className="drawer h-screen gap-5 flex w-80 flex-col md:w-1/12 sm:w-1/12 xs:w-1/6">
+        <div className="drawer h-screen gap-5 flex w-80 flex-col md:w-1/12 sm:w-1/12 xs:w-1/6 lg:mr-32 md:mr-3 xs:mr-2">
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col pt-5 px-2 items-center justify-center">
-                    <label htmlFor="my-drawer-2" className="btn bg-slate-100 drawer-button lg:hidden">
+                    <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden">
                         <Bars3Icon
                             className="block h-5 w-5 xs:h-3 xs:w-3"
                             aria-hidden="true"
