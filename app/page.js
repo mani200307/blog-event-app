@@ -6,8 +6,10 @@ export default function Home() {
   return (
     <div className="h-screen bg-blue-300 pt-8 px-4 flex-1 text-white border-s-2">
       <Header />
-      <HomeCard />
-      <HomeCard />
+      <div className="flex flex-row gap-6">
+        <HomeCard />
+        <HomeCard />
+      </div>
       {/* <Footer /> */}
     </div>
   )
