@@ -4,7 +4,7 @@ import React from 'react'
 
 const HomeCard = ({ type, desc, linkUrl, imgUrl }) => {
     return (
-        <div className="flex bg-white lg:w-96 md:w-96 sm:w-80 xs:w-72 rounded-xl shadow-xl">
+        <div className="flex bg-white text-black lg:w-96 md:w-96 sm:w-80 xs:w-72 rounded-xl shadow-xl">
             <figure><Image width={500} height={500} src={imgUrl} /></figure>
             <div className="card-body">
                 <h2 className="card-title">
