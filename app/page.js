@@ -1,11 +1,11 @@
 import Header from "./components/Header";
 import HomeCard from "./components/HomeCard";
 import blogImg from './assets/blog.png'
-import Image from "next/image";
+import eventImg from './assets/event.png'
 
 export default function Home() {
   return (
-    <div className="h-screen pt-8 px-4 flex-1">
+    <div className="h-screen bg-white pt-8 px-4 flex-1">
       <Header />
       <div className="flex flex-row justify-center md:flex-row xs:flex-col mt-5 gap-6">
         <HomeCard type='Blogs' linkUrl='blog' imgUrl={blogImg} desc="Make your own blog, View others blogs" />
