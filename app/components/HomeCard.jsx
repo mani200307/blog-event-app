@@ -12,8 +12,8 @@ const HomeCard = ({ type, desc, linkUrl, imgUrl }) => {
                 </h2>
                 <p>{desc}</p>
                 <div className="flex flex-row justify-end gap-5">
-                    <Link href={`/${linkUrl}/create`}><button className='btn'>New</button></Link>
-                    <Link href={`/${linkUrl}/view`}><button className='btn'>View</button></Link>
+                    <Link href={`/${linkUrl}/create`}><button className='btn text-white'>New</button></Link>
+                    <Link href={`/${linkUrl}/view`}><button className='btn text-white'>View</button></Link>
                 </div>
             </div>
             <Image href={imgUrl} />

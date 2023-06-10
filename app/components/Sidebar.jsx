@@ -9,9 +9,9 @@ const Sidebar = () => {
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col pt-5 px-2 items-center justify-center">
-                    <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden">
+                    <label htmlFor="my-drawer-2" className="btn bg-white border-none drawer-button lg:hidden">
                         <Bars3Icon
-                            className="block h-5 w-5 xs:h-3 xs:w-3"
+                            className="block h-5 w-5 xs:h-3 xs:w-3 text-black"
                             aria-hidden="true"
                         />
                     </label>

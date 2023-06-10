@@ -12,7 +12,7 @@ export default function Home() {
         <HomeCard type='Events' linkUrl='event' imgUrl={blogImg} desc="Schedule your own event, Browse several events" />
       </div>
       <div className="divider invisible"></div>
-      <h1 className="text-2xl text-center">Events Active Today</h1>
+      <h1 className="text-2xl text-black text-center">Events Active Today</h1>
       {/* <Footer /> */}
     </div>
   )
