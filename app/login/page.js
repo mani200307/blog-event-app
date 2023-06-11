@@ -10,20 +10,20 @@ export default function Page() {
     const [password, setPassword] = useState('')
     const router = useRouter()
     const supabase = createClientComponentClient()
-    
+
     const handleSignIn = async () => {
         const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password,
         })
-        if(error) {
+        if (error) {
             console.log(error);
             alert("Incorrect password")
         }
         else {
             console.log("Success");
             router.refresh()
-            router.replace(`/`)    
+            router.replace(`/`)
         }
     }
 
