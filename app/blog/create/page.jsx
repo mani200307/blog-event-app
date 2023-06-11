@@ -1,7 +1,37 @@
+"use client"
+
 import Header from '@/app/components/Header'
-import React from 'react'
+import React, { useState } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 const page = () => {
+    const supabase = createClientComponentClient()
+    const [loading, setLoading] = useState(true)
+    const [title, setTitle] = useState("")
+    const [author, setAuthor] = useState("")
+    const [category, setCategory] = useState("")
+    const [body, setBody] = useState("")
+
+    const createBlog = async () => {
+        try {
+            setLoading(true)
+
+            const { error } = await supabase
+                .from('blogs')
+                .insert({ title: title, authorName: author, category: category, body: body })
+                .single()
+
+            console.log({ title: title, authorName: author, category: category, body: body });
+
+            alert("Blog created successfully");
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <form className="w-full flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
             <Header type='Create Blog' />
@@ -11,19 +41,19 @@ const page = () => {
                         <label className="label">
                             <span className="label-text text-black text-lg">What is your blog title?</span>
                         </label>
-                        <input type="text" placeholder="Blog title" className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="text" placeholder="Blog title" onChange={(e) => setTitle(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text text-black text-lg">What is your name?</span>
                         </label>
-                        <input type="text" placeholder="Blog title" className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="text" placeholder="Blog title" onChange={(e) => setAuthor(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
                     </div>
                     <div className="w-fullmax-w-xs">
                         <label className="label">
                             <span className="label-texttext-lg">What is your blog category?</span>
                         </label>
-                        <select className="select select-md select-bordered border-gray-300">
+                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
                             <option disabled>Select category</option>
                             <option defaultChecked>Music</option>
                             <option>News</option>
@@ -38,9 +68,10 @@ const page = () => {
                         <label className="label">
                             <span className="label-text text-lg">About your blog</span>
                         </label>
-                        <textarea placeholder="Blog description" className="input input-lg input-bordered border-gray-300max-w-xs w-80 h-60" />
+                        <textarea onChange={(e) => setBody(e.target.value)} placeholder="Blog description" className="input input-lg input-bordered border-gray-300max-w-xs w-80 h-60" />
                     </div>
-                    <button className='btn w-fit'>CREATE</button>
+                    <button onClick={createBlog} className='btn w-fit'>CREATE</button>
+                    {/* {loading ? <h1>Creating blog..</h1> : <h1>Blog created successfully</h1>} */}
                 </div>
             </div>
         </form>
