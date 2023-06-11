@@ -8,7 +8,7 @@ const page = () => {
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
                     <div>
                         <label className="label">
-                            <span className="label-text text-black text-lg">What is your blog's title?</span>
+                            <span className="label-text text-black text-lg">What is your blog title?</span>
                         </label>
                         <input type="text" placeholder="Blog title" className="input input-bordered border-gray-300 bg-white text-black max-w-xs w-60" />
                     </div>
@@ -20,7 +20,7 @@ const page = () => {
                     </div>
                     <div className="w-full bg-white text-black max-w-xs">
                         <label className="label">
-                            <span className="label-text text-black text-lg">What is your blog's category?</span>
+                            <span className="label-text text-black text-lg">What is your blog category?</span>
                         </label>
                         <select className="select select-md bg-white text-black select-bordered border-gray-300">
                             <option disabled>Select category</option>
