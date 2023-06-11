@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "@supabase/auth-helpers-nextjs": "^0.7.2",
+    "@supabase/supabase-js": "^2.24.0",
     "autoprefixer": "10.4.14",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
@@ -22,6 +23,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "daisyui": "^3.0.20"
+    "daisyui": "^3.0.20",
+    "encoding": "^0.1.13"
   }
 }
