@@ -4,7 +4,7 @@ import React from 'react'
 
 const HomeCard = ({ type, desc, linkUrl, imgUrl }) => {
     return (
-        <div className="flex bg-white text-black lg:w-96 md:w-96 sm:w-80 xs:w-72 rounded-xl shadow-xl">
+        <div className="flex lg:w-96 md:w-96 sm:w-80 xs:w-72 rounded-xl shadow-xl">
             <figure><Image width={500} height={500} alt={`${type}`} src={imgUrl} /></figure>
             <div className="card-body">
                 <h2 className="card-title">
@@ -12,8 +12,8 @@ const HomeCard = ({ type, desc, linkUrl, imgUrl }) => {
                 </h2>
                 <p>{desc}</p>
                 <div className="flex flex-row justify-end gap-5">
-                    <Link href={`/${linkUrl}/create`}><button className='btn text-white'>New</button></Link>
-                    <Link href={`/${linkUrl}/view`}><button className='btn text-white'>View</button></Link>
+                    <Link href={`/${linkUrl}/create`}><button className='btn'>New</button></Link>
+                    <Link href={`/${linkUrl}/view`}><button className='btn'>View</button></Link>
                 </div>
             </div>
         </div>
