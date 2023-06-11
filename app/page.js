@@ -6,7 +6,7 @@ import eventImg from './assets/event.png'
 export default function Home() {
 
   return (
-    <div className="h-screen pt-8 px-4 overflow-hidden flex-1">
+    <div className="h-screen pt-8 px-4 flex-1">
       <Header type=""/>
       <div className="flex -ml-7 flex-row justify-center md:flex-row xs:flex-col mt-5 gap-6">
         <HomeCard type='Blogs' linkUrl='blog' imgUrl={blogImg} desc="Make your own blog, View others blogs" />
