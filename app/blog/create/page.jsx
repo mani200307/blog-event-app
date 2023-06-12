@@ -4,7 +4,7 @@ import Header from '@/app/components/Header'
 import React, { useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-const page = () => {
+const Page = () => {
     const supabase = createClientComponentClient()
     const [loading, setLoading] = useState(true)
     const [title, setTitle] = useState("")
@@ -78,4 +78,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

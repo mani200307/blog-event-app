@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import BlogCard from '@/app/components/BlogCard'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-const page = () => {
+const Page = () => {
 
     const [blogs, setBlogs] = useState([]);
 
@@ -38,4 +38,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
