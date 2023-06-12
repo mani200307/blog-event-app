@@ -28,7 +28,7 @@ export default function Page() {
     }
 
     return (
-        <div className="form-control flex-1 flex-col space-y-5 w-full max-w-xs">
+        <div className="form-control h-screen flex-1 flex-col space-y-5 w-full max-w-xs">
             <h1 className='text-2xl mt-8'>Sign in</h1>
             <div>
                 <label className="label">
