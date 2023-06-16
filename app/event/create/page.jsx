@@ -37,7 +37,7 @@ const Page = () => {
     }
 
     return (
-        <form className="w-full flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
+        <form className="w-full bg-white flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
             <Header type='Schedule event' />
             <div className="h-full flex lg:flex-row md:flex-row sm:flex-col xs:flex-col gap-5 mt-4 pt-8">
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
@@ -72,7 +72,7 @@ const Page = () => {
                         <label className="label">
                             <span className="label-text text-black text-lg">When is that happening?</span>
                         </label>
-                        <div className='ms-1'>
+                        <div className='ms-1 opacity-80'>
                             <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='hover:cursor-pointer hover:font-semibold' />
                         </div>
                     </div>
