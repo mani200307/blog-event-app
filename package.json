@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.18",
     "@supabase/auth-helpers-nextjs": "^0.7.2",
     "@supabase/supabase-js": "^2.24.0",
@@ -18,8 +20,10 @@
     "next": "13.4.4",
     "postcss": "8.4.24",
     "react": "18.2.0",
+    "react-datepicker": "^4.13.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.12.1",
+    "react-time-picker": "^6.2.0",
     "tailwindcss": "3.3.2",
     "zustand": "^4.3.8"
   },
