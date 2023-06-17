@@ -10,6 +10,7 @@ export default function Page() {
     const [password, setPassword] = useState('')
     const router = useRouter()
     const supabase = createClientComponentClient()
+    const [failed, setFailed] = useState(false);
 
     const setCookie = (cookieName, cookieValue, expiryDate) => {
         var d = new Date();
@@ -25,7 +26,7 @@ export default function Page() {
         })
         if (error) {
             console.log(error);
-            alert("Incorrect password")
+            setFailed(true);
         }
         else {
             setCookie("isLogged", "true", new Date());
@@ -36,9 +37,16 @@ export default function Page() {
     }
 
     return (
-        <div className="form-control h-screen flex-1 flex-col space-y-5 w-full max-w-xs">
+        <div className="form-control h-screen overflow-scroll flex-1 flex-col space-y-5 w-full max-w-xs">
             <h1 className='text-2xl mt-8'>Sign in</h1>
             <div>
+                {
+                    failed &&
+                    <div className="alert alert-error">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>Incorrect password</span>
+                    </div>
+                }
                 <label className="label">
                     <span className="label-text text-lg">Email</span>
                 </label>

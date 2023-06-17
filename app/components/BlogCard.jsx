@@ -7,11 +7,11 @@ const BlogCard = ({ name, authName, categ, desc }) => {
             <div className="card-body">
                 <h2 className="card-title">
                     <div>{name}</div>
-                    <div className="badge badge-secondary">{categ}</div>
+                    <div className="badge badge-neutral">{categ}</div>
                 </h2>
                 <p>{desc}</p>
                 <div className="card-actions justify-end">
-                    <div className="badge badge-outline">{authName}</div>
+                    <div className="badge badge-ghost">{authName}</div>
                 </div>
             </div>
         </div>
