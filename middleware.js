@@ -14,7 +14,7 @@ export async function middleware(request) {
     const getCurUser = async () => {
         var isLogged = getCookie("isLogged");
         try {
-            if (isLogged === "") {
+            if (isLogged === "" || isLogged == null) {
                 if (request.nextUrl.pathname.startsWith("/blog")) {
                     const url = request.nextUrl.clone();
                     url.pathname = "/login";
@@ -34,4 +34,9 @@ export async function middleware(request) {
     }
 
     return await getCurUser(); // Return the result of getCurUser()
+
+}
+
+export const config = {
+    matcher: ['/blog/:path*', '/event/:path*'],
 }
