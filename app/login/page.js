@@ -11,6 +11,13 @@ export default function Page() {
     const router = useRouter()
     const supabase = createClientComponentClient()
 
+    const setCookie = (cookieName, cookieValue, expiryDate) => {
+        var d = new Date();
+        d.setTime(d.getTime() + (expiryDate * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cookieName + "=" + cookieValue + "; " + expires + "; path=/";
+    }
+
     const handleSignIn = async () => {
         const { data, error } = await supabase.auth.signInWithPassword({
             email,
@@ -21,6 +28,7 @@ export default function Page() {
             alert("Incorrect password")
         }
         else {
+            setCookie("isLogged", "true", new Date());
             console.log("Success");
             router.refresh()
             router.replace(`/`)

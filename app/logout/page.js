@@ -8,9 +8,14 @@ export default function Page() {
     const supabase = createClientComponentClient()
     const router = useRouter()
 
+    const delete_cookie = () => {
+        document.cookie = "isLogged" + '=; Path=/; Expires='+new Date()+';';
+    }
+
     useEffect(() => {
         const handleSignOut = async () => {
             await supabase.auth.signOut()
+            delete_cookie();
             router.replace('/');
         }
         handleSignOut();
