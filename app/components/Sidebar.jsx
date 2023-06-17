@@ -5,7 +5,7 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 const Sidebar = () => {
 
     return (
-        <div className="drawer h-10 bg-white gap-5 flex w-80 flex-col md:w-1/12 sm:w-1/12 xs:w-1/6 lg:mr-32 md:mr-3 xs:mr-2">
+        <div className="drawer bg-white gap-5 flex w-80 flex-col md:w-1/12 sm:w-1/12 xs:w-1/6 lg:mr-32 md:mr-3 xs:mr-2">
             <div className="drawer lg:drawer-open lg:h-full">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col pt-5 px-2 items-center justify-center">
