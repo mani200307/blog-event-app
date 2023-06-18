@@ -52,10 +52,56 @@ const Page = () => {
 
     }, [])
 
+    const timelineChanged = (e) => {
+        var timeline = e.target.value;
+        const currentDate = new Date().toISOString().slice(0, 10);
+
+        if (timeline === 'Past Events') {
+            const getData = async () => {
+                const { data, error } = await supabase
+                    .from('events')
+                    .select("*")
+                    .lt('date', currentDate);
+
+                setEvents(data);
+            }
+
+            getData();
+        }
+        else if (timeline === 'Upcoming Events') {
+            const getData = async () => {
+                const { data, error } = await supabase
+                    .from('events')
+                    .select("*")
+                    .gt('date', currentDate);
+
+                setEvents(data);
+            }
+
+            getData();
+        }
+        else {
+            const getData = async () => {
+                const { data, error } = await supabase
+                    .from('events')
+                    .select("*")
+
+                setEvents(data);
+            }
+
+            getData();
+        }
+    }
+
     return (
         <div className="h-screen overflow-x-hidden overflow-scroll bg-white pt-8 px-4 flex-1">
             <Header type='Events' />
-            <div className='flex gap-10 mt-10'>
+            <select onChange={timelineChanged} className="select -ml-3 mt-6 items-center select-sm border-none">
+                <option defaultChecked>All Events</option>
+                <option>Past Events</option>
+                <option>Upcoming Events</option>
+            </select>
+            <div className='flex mt-2 gap-10'>
                 <button onClick={() => window.my_modal_2.showModal()}>
                     <div className="w-10 rounded-full flex gap-2">
                         <Image alt='filter' width={20} height={20} src={pic} /><span
@@ -73,7 +119,7 @@ const Page = () => {
                         <label className="label">
                             <span className="label-texttext-lg">Category</span>
                         </label>
-                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
+                        <select onChange={(e) => setCategory(e.target.value)} className="select select-sm select-bordered border-gray-300">
                             <option disabled>Select category</option>
                             <option defaultChecked>Other</option>
                             <option>Music</option>
