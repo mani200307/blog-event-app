@@ -29,7 +29,7 @@ const Page = () => {
     return (
         <div className="h-screen overflow-x-hidden overflow-scroll bg-white pt-8 px-4 flex-1">
             <Header type='Events' />
-            <div className='mt-10 grid lg:grid-cols-3 lg:gap-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-2'>
+            <div className='mt-10 space-y-5 gap-2'>
                 {events.map((event, index) => (
                     <EventCard key={index} name={event.name} venue={event.venue} startDate={event.date} time={event.time} desc={event.body} categ={event.category} />
                 ))}
