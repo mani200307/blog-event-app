@@ -18,8 +18,6 @@ const Page = () => {
 
     const createEvent = async () => {
         try {
-            setLoading(true);
-
             const { error } = await supabase
                 .from('events')
                 .insert({ name: title, category: category, venue: venue, date: startDate, time: time, body: body })
@@ -64,7 +62,8 @@ const Page = () => {
                         </label>
                         <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
                             <option disabled>Select category</option>
-                            <option defaultChecked>Music</option>
+                            <option>None</option>
+                            <option>Music</option>
                             <option>News</option>
                             <option>Technology</option>
                             <option>Sports</option>
