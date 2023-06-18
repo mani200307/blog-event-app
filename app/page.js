@@ -10,6 +10,7 @@ export default function Home() {
       <HomeBlog />
       <div className="divider invisible"></div>
       <ActiveEvents />
+      <div className="divider invisible"></div>
     </div>
   )
 }

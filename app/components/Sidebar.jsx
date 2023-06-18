@@ -33,8 +33,7 @@ const Sidebar = () => {
                             <div className='flex items-center pl-1 gap-4'>
                                 <Link href="/">
                                     <span
-                                        className={`className='font-medium cursor-pointer' ${activePage === 'createBlog' ? 'bg-gray-800' : ''
-                                            }`}
+                                        className={`className='font-medium cursor-pointer' }`}
                                         onClick={() => setActivePage('')}
                                     >
                                         <h1 className='text-2xl'>BlogEvent</h1>
@@ -45,7 +44,7 @@ const Sidebar = () => {
                         <div className='flex flex-col items-start gap-2 mt-3'>
                             <Link href="/blog/create">
                                 <span
-                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap ${activePage === 'createBlog' ? 'bg-gray-800' : ''
+                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'createBlog' ? 'bg-gray-900' : ''
                                         }`}
                                     onClick={() => setActivePage('createBlog')}
                                 >
@@ -54,7 +53,7 @@ const Sidebar = () => {
                             </Link>
                             <Link href="/blog/view">
                                 <span
-                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap ${activePage === 'viewBlogs' ? 'bg-gray-800' : ''
+                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'viewBlogs' ? 'bg-gray-900' : ''
                                         }`}
                                     onClick={() => setActivePage('viewBlogs')}
                                 >
@@ -63,7 +62,7 @@ const Sidebar = () => {
                             </Link>
                             <Link href="/event/create">
                                 <span
-                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap ${activePage === 'createEvent' ? 'bg-gray-800' : ''
+                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap ${activePage === 'createEvent' ? 'bg-gray-900' : ''
                                         }`}
                                     onClick={() => setActivePage('createEvent')}
                                 >
@@ -72,7 +71,7 @@ const Sidebar = () => {
                             </Link>
                             <Link href="/event/view">
                                 <span
-                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap ${activePage === 'viewEvents' ? 'bg-gray-800' : ''
+                                    className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'viewEvents' ? 'bg-gray-900' : ''
                                         }`}
                                     onClick={() => setActivePage('viewEvents')}
                                 >
@@ -83,8 +82,7 @@ const Sidebar = () => {
                         <div className='divider'></div>
                         <Link href='/logout'>
                             <span
-                                className={`text-xl flex items-center cursor-pointer hover:bg-gray-900 p-2 rounded w-full overflow-hidden whitespace-nowrap ${activePage === 'viewEvents' ? 'bg-gray-800' : ''
-                                    }`}
+                                className={`text-xl flex items-center justify-center cursor-pointer hover:bg-gray-900 p-2 rounded w-full overflow-hidden whitespace-nowrap }`}
                                 onClick={() => setActivePage('')}
                             >
                                 <h1>Logout</h1>

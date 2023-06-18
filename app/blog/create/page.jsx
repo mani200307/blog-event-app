@@ -19,8 +19,6 @@ const Page = () => {
                 .insert({ title: title, authorName: author, category: category, body: body })
                 .single()
 
-            console.log({ title: title, authorName: author, category: category, body: body });
-
             setIsCreated(true);
 
         } catch (error) {
@@ -57,8 +55,8 @@ const Page = () => {
                             <span className="label-texttext-lg">What is your blog category?</span>
                         </label>
                         <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
-                            <option disabled>Select category</option>
-                            <option defaultChecked>None</option>
+                            <option>Select Category</option>
+                            <option>Other</option>
                             <option>Music</option>
                             <option>News</option>
                             <option>Technology</option>

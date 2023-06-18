@@ -23,8 +23,6 @@ const Page = () => {
                 .insert({ name: title, category: category, venue: venue, date: startDate, time: time, body: body })
                 .single()
 
-            console.log({ name: title, category: category, venue: venue, date: startDate, time: time, body: body });
-
             setIsCreated(true);
 
         } catch (error) {
@@ -33,7 +31,7 @@ const Page = () => {
     }
 
     return (
-        <form className="h-screen overflow-x-hidden overflow-scroll w-full bg-white flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
+        <form className="h-full overflow-x-hidden w-full bg-white flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
             <Header type='Schedule Event' />
             {
                 isCreated &&
@@ -61,8 +59,8 @@ const Page = () => {
                             <span className="label-texttext-lg">What is your event category?</span>
                         </label>
                         <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
-                            <option disabled>Select category</option>
-                            <option>None</option>
+                            <option>Select Category</option>
+                            <option>Other</option>
                             <option>Music</option>
                             <option>News</option>
                             <option>Technology</option>
@@ -76,8 +74,9 @@ const Page = () => {
                         <label className="label">
                             <span className="label-text text-black text-lg">When is that happening?</span>
                         </label>
-                        <div className='ms-1 opacity-80'>
-                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='hover:cursor-pointer hover:font-semibold' />
+                        <div className='ms-1'>
+                            <input type='date' onChange={(e) => setStartDate(e.target.value)} />
+                            {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='bg-gray-200 border p-2 w-32 hover:cursor-pointer' /> */}
                         </div>
                     </div>
                     <div>

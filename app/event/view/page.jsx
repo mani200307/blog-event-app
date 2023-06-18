@@ -135,7 +135,7 @@ const Page = () => {
                     <button>close</button>
                 </form>
             </dialog>
-            <div className='mt-10 space-y-5 gap-2'>
+            <div className='mt-10 mb-3 space-y-5 gap-2'>
                 {events.map((event, index) => (
                     <EventCard key={index} name={event.name} venue={event.venue} startDate={event.date} time={event.time} desc={event.body} categ={event.category} />
                 ))
