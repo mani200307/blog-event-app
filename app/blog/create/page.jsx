@@ -52,7 +52,7 @@ const Page = () => {
                         </label>
                         <input type="text" placeholder="Author name" onChange={(e) => setAuthor(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
                     </div>
-                    <div className="w-fullmax-w-xs">
+                    <div className="w-full max-w-xs">
                         <label className="label">
                             <span className="label-texttext-lg">What is your blog category?</span>
                         </label>

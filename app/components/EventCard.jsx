@@ -39,7 +39,7 @@ const EventCard = ({ name, venue, startDate, time, categ, desc }) => {
 
     return (
         <div className="lg:flex lg:w-fit xs:w-64 rounded-lg shadow-lg">
-            <div className="bg-gray-400 rounded-lg lg:w-36 py-4 block shadow-inner">
+            <div className="bg-gray-500 rounded-lg lg:w-36 py-4 block shadow-inner">
                 <div className="text-center tracking-wide">
                     <div className="text-white font-bold text-4xl ">{day}</div>
                     <div className="text-white font-normal text-2xl">{month}</div>
@@ -51,10 +51,10 @@ const EventCard = ({ name, venue, startDate, time, categ, desc }) => {
                     {name}
                 </div>
                 <div className='flex ml-1 xs:justify-center lg:justify-between mt-2 xs:gap-2'>
-                    <div className="text-gray-600 w-fit bg-gray-100 rounded-full font-medium text-xs text-center lg:text-left px-2">
+                    <div className="text-black w-fit p-0.5 bg-gray-100 rounded-full font-medium text-xs text-center lg:text-left px-2">
                         {venue}
                     </div>
-                    <div className="text-black w-fit bg-gray-300 rounded-full font-medium text-xs text-center lg:text-left px-2">
+                    <div className="text-white w-fit p-0.5 bg-gray-500 rounded-full font-medium text-xs text-center lg:text-left px-2">
                         {categ}
                     </div>
                 </div>
