@@ -42,7 +42,7 @@ const Header = ({ type }) => {
     return (
         <div className='flex -mt-3 justify-between items-center'>
             {
-                type === "" ? <h1 className="text-2xl">Welcome {isLogged.split('@')[0]}</h1> : <h1 className="text-3xl">{type}</h1>
+                type === "" ? <h1 className="text-3xl font-medium">Welcome {isLogged.split('@')[0]}</h1> : <h1 className="text-3xl font-medium">{type}</h1>
             }
             <Avatar />
         </div>
