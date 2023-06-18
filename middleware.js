@@ -15,6 +15,11 @@ export async function middleware(request) {
         var isLogged = getCookie("isLogged");
         try {
             if (isLogged === "" || isLogged == null) {
+                if (request.nextUrl.pathname.startsWith("/")) {
+                    const url = request.nextUrl.clone();
+                    url.pathname = "/login";
+                    return NextResponse.redirect(url);
+                }
                 if (request.nextUrl.pathname.startsWith("/blog")) {
                     const url = request.nextUrl.clone();
                     url.pathname = "/login";
@@ -38,5 +43,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-    matcher: ['/blog/:path*', '/event/:path*'],
+    matcher: ['/blog/:path*', '/event/:path*', '/'],
 }

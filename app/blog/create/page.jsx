@@ -74,7 +74,7 @@ const Page = () => {
                         </label>
                         <textarea onChange={(e) => setBody(e.target.value)} placeholder="Blog description" className="input input-lg input-bordered border-gray-300max-w-xs w-80 h-60" />
                     </div>
-                    <button onClick={createBlog} className='btn w-fit'>CREATE</button>
+                    <button onClick={createBlog} className='btn btn-neutral w-fit'>CREATE</button>
                 </div>
             </div>
         </form>

@@ -61,9 +61,9 @@ const ActiveEvents = () => {
     return (
         <>
             {isLogged && (
-                <div>
-                    <h1 className="text-2xl text-center">Events Active Today</h1>
-                    <div className='mt-10 grid lg:grid-cols-3 lg:gap-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-2'>
+                <div className='flex flex-col gap-2'>
+                    <h1 className="text-2xl">Events Active Today</h1>
+                    <div className='mt-5 space-y-3'>
                         {events.map((event, index) => (
                             curDate === event.date && (
                                 <EventCard

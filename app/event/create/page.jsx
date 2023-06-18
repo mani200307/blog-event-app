@@ -34,7 +34,7 @@ const Page = () => {
 
     return (
         <form className="h-screen overflow-x-hidden overflow-scroll w-full bg-white flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
-            <Header type='Schedule event' />
+            <Header type='Schedule Event' />
             {
                 isCreated &&
                 <div className="alert w-fit">

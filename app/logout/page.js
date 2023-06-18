@@ -16,7 +16,7 @@ export default function Page() {
         const handleSignOut = async () => {
             await supabase.auth.signOut()
             delete_cookie();
-            router.replace('/');
+            router.replace('/login');
         }
         handleSignOut();
     }, []);

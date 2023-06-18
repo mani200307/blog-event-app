@@ -3,14 +3,13 @@
 import React, { useEffect, useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Avatar from './Avatar'
-import Link from 'next/link'
 
 const Header = ({ type }) => {
 
     const supabase = createClientComponentClient()
     const [isLogged, setIsLogged] = useState("");
 
-    function getCookie(name) {
+    const getCookie = (name) => {
         var cookieArr = document.cookie.split(";");
 
         for (var i = 0; i < cookieArr.length; i++) {
@@ -43,9 +42,9 @@ const Header = ({ type }) => {
     return (
         <div className='flex -mt-3 justify-between items-center'>
             {
-                type === "" && isLogged !== "" ? <h1 className="text-2xl">Welcome {isLogged.split('@')[0]}</h1> : <h1 className="text-3xl">{type}</h1>
+                type === "" ? <h1 className="text-2xl">Welcome {isLogged.split('@')[0]}</h1> : <h1 className="text-3xl">{type}</h1>
             }
-            {isLogged ? <Avatar /> : <Link href='/login'><button className='btn mr-5'>Log in</button></Link>}
+            <Avatar />
         </div>
     )
 }
