@@ -6,16 +6,14 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 const Page = () => {
     const supabase = createClientComponentClient()
-    const [loading, setLoading] = useState(true)
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
     const [category, setCategory] = useState("")
     const [body, setBody] = useState("")
+    const [isCreated, setIsCreated] = useState(false);
 
     const createBlog = async () => {
         try {
-            setLoading(true)
-
             const { error } = await supabase
                 .from('blogs')
                 .insert({ title: title, authorName: author, category: category, body: body })
@@ -23,18 +21,23 @@ const Page = () => {
 
             console.log({ title: title, authorName: author, category: category, body: body });
 
-            alert("Blog created successfully");
+            setIsCreated(true);
 
         } catch (error) {
             console.log(error);
-        } finally {
-            setLoading(false)
         }
     }
 
     return (
         <form className="h-screen overflow-x-hidden overflow-scroll w-full flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
             <Header type='Create Blog' />
+            {
+                isCreated &&
+                <div className="alert w-fit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>Blog created successfully</span>
+                </div>
+            }
             <div className="flex lg:flex-row md:flex-row sm:flex-col xs:flex-col gap-5 mt-4 pt-8">
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
                     <div>
@@ -47,7 +50,7 @@ const Page = () => {
                         <label className="label">
                             <span className="label-text text-black text-lg">What is your name?</span>
                         </label>
-                        <input type="text" placeholder="Blog title" onChange={(e) => setAuthor(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="text" placeholder="Author name" onChange={(e) => setAuthor(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
                     </div>
                     <div className="w-fullmax-w-xs">
                         <label className="label">
@@ -55,7 +58,8 @@ const Page = () => {
                         </label>
                         <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
                             <option disabled>Select category</option>
-                            <option defaultChecked>Music</option>
+                            <option defaultChecked>None</option>
+                            <option>Music</option>
                             <option>News</option>
                             <option>Technology</option>
                             <option>Sports</option>

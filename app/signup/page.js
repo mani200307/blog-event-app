@@ -8,6 +8,7 @@ import { useState } from 'react'
 export default function Page() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [signed, setSigned] = useState(false);
     const router = useRouter()
     const supabase = createClientComponentClient()
 
@@ -20,12 +21,19 @@ export default function Page() {
             },
         })
         router.refresh()
-        alert("Goto to your mailbox to confirm signup")
+        setSigned(true);
     }
 
     return (
-        <div className="form-control h-screen flex-1 flex-col space-y-5 w-full max-w-xs">
+        <div className="form-control h-screen flex-1 flex-col space-y-5 mt-4">
             <h1 className='text-2xl mt-8'>Sign Up</h1>
+            {
+                signed &&
+                <div className="alert w-fit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>Check you mailbox to confirm signup</span>
+                </div>
+            }
             <div>
                 <label className="label">
                     <span className="label-text text-lg">Email</span>

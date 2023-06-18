@@ -28,7 +28,7 @@ const Page = () => {
 
     return (
         <div className="h-screen overflow-x-hidden overflow-scroll bg-white pt-8 px-4 flex-1">
-            <Header type='View Blogs' />
+            <Header type='Blogs' />
             <div className='mt-10 grid lg:grid-cols-3 lg:gap-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-2'>
                 {blogs.map((blog, index) => (
                     <BlogCard name={blog.title} key={index} authName={blog.authorName} desc={blog.body} categ={blog.category} />

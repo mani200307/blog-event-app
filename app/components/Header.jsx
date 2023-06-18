@@ -43,7 +43,7 @@ const Header = ({ type }) => {
     return (
         <div className='flex -mt-3 justify-between items-center'>
             {
-                type === "" && isLogged !== "" ? <h1 className="text-2xl">Welcome {isLogged.split('@')[0]},</h1> : <h1 className="text-2xl">{type}</h1>
+                type === "" && isLogged !== "" ? <h1 className="text-2xl">Welcome {isLogged.split('@')[0]}</h1> : <h1 className="text-3xl">{type}</h1>
             }
             {isLogged ? <Avatar /> : <Link href='/login'><button className='btn mr-5'>Log in</button></Link>}
         </div>

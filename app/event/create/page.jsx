@@ -8,13 +8,13 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Page = () => {
     const supabase = createClientComponentClient()
-    const [loading, setLoading] = useState(true)
     const [title, setTitle] = useState("");
     const [venue, setVenue] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [time, setTime] = useState("");
     const [category, setCategory] = useState("");
     const [body, setBody] = useState("");
+    const [isCreated, setIsCreated] = useState(false);
 
     const createEvent = async () => {
         try {
@@ -27,18 +27,23 @@ const Page = () => {
 
             console.log({ name: title, category: category, venue: venue, date: startDate, time: time, body: body });
 
-            alert("Event created successfully");
+            setIsCreated(true);
 
         } catch (error) {
             console.log(error);
-        } finally {
-            setLoading(false)
         }
     }
 
     return (
         <form className="h-screen overflow-x-hidden overflow-scroll w-full bg-white flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
             <Header type='Schedule event' />
+            {
+                isCreated &&
+                <div className="alert w-fit">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>Event created successfully</span>
+                </div>
+            }
             <div className="flex lg:flex-row md:flex-row sm:flex-col xs:flex-col gap-5 mt-4 pt-8">
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
                     <div>
@@ -88,7 +93,7 @@ const Page = () => {
                         </label>
                         <textarea onChange={(e) => setBody(e.target.value)} placeholder="Event description" className="input input-lg input-bordered border-gray-300max-w-xs w-80 h-60" />
                     </div>
-                    <button onClick={createEvent} className='btn w-fit'>CREATE</button>
+                    <button onClick={createEvent} className='btn btn-neutral w-fit'>CREATE</button>
                 </div>
             </div>
         </form>
