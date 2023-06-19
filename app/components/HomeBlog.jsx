@@ -12,7 +12,11 @@ const HomeBlog = () => {
         const supabase = createClientComponentClient();
 
         const getData = async () => {
-            const { data, error } = await supabase.from('blogs').select('*').order('created_at', { ascending: false }).limit(3);
+            const { data, error } = await supabase
+                .from('blogs')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(3);
             setBlogs(data);
         };
 

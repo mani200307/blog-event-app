@@ -10,18 +10,21 @@ const ActiveEvents = () => {
     const [isLogged, setIsLogged] = useState(""); // Move isLogged declaration here
 
     useEffect(() => {
-        const date = new Date();
-        var getYear = date.toLocaleString("default", { year: "numeric" });
-        var getMonth = date.toLocaleString("default", { month: "2-digit" });
-        var getDay = date.toLocaleString("default", { day: "2-digit" });
-        var dateFormat = getYear + "-" + getMonth + "-" + getDay;
-        setCurDate(dateFormat);
         const supabase = createClientComponentClient();
 
         const getData = async () => {
+            const date = new Date();
+            var getYear = date.toLocaleString("default", { year: "numeric" });
+            var getMonth = date.toLocaleString("default", { month: "2-digit" });
+            var getDay = date.toLocaleString("default", { day: "2-digit" });
+            var dateFormat = getYear + "-" + getMonth + "-" + getDay;
+            setCurDate(dateFormat);
+            console.log(dateFormat);
+
             const { data, error } = await supabase
                 .from('events')
-                .select("*");
+                .select("*")
+                .eq('date', dateFormat);
 
             console.log(data);
             setEvents(data);
@@ -64,7 +67,7 @@ const ActiveEvents = () => {
                 <div className='flex flex-col gap-2'>
                     <h1 className="text-2xl">Events Active Today</h1>
                     <div className='mt-5 space-y-3'>
-                        {events.map((event, index) => (
+                        {events && events.map((event, index) => (
                             curDate === event.date && (
                                 <EventCard
                                     key={index}
@@ -78,6 +81,7 @@ const ActiveEvents = () => {
                             )
                         ))}
                     </div>
+                    {!events.length && <h1>No events today..</h1>}
                 </div>
             )}
         </>

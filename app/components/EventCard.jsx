@@ -1,4 +1,3 @@
-// EventCard.js
 import React, { useEffect, useState } from 'react';
 
 const EventCard = ({ timeline, name, venue, startDate, time, categ, desc }) => {
@@ -31,7 +30,7 @@ const EventCard = ({ timeline, name, venue, startDate, time, categ, desc }) => {
     }, [timeline, startDate, time]);
 
     return (
-        <div className="lg:flex lg:w-fit xs:w-64 rounded-lg shadow-lg">
+        <div className="cursor-context-menu lg:flex lg:w-fit xs:w-64 rounded-lg shadow-lg">
             <div className="bg-gray-500 rounded-lg lg:w-36 py-4 block shadow-inner">
                 <div className="text-center tracking-wide">
                     <div className="text-white font-bold text-4xl ">{day}</div>

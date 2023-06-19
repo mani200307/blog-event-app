@@ -18,6 +18,7 @@ const Page = () => {
             const { data, error } = await supabase
                 .from('blogs')
                 .select("*")
+                .order('created_at', { ascending: false });
 
             setBlogs(data);
         }
@@ -31,6 +32,7 @@ const Page = () => {
                 .from('blogs')
                 .select("*")
                 .eq('category', category)
+                .order('created_at', { ascending: false });
 
             console.log(data);
             setBlogs(data);
@@ -45,6 +47,7 @@ const Page = () => {
             const { data, error } = await supabase
                 .from('blogs')
                 .select("*")
+                .order('created_at', { ascending: false });
 
             console.log(data);
             setBlogs(data);

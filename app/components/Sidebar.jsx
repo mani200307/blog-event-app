@@ -41,7 +41,7 @@ const Sidebar = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className='flex flex-col items-start gap-2 mt-3'>
+                        <div className='flex flex-col justify-between items-start gap-4 mt-3'>
                             <Link href="/blog/create">
                                 <span
                                     className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'createBlog' ? 'bg-gray-900' : ''
