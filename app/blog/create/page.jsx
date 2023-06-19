@@ -12,7 +12,15 @@ const Page = () => {
     const [body, setBody] = useState("")
     const [isCreated, setIsCreated] = useState(false);
 
-    const createBlog = async () => {
+    const resetForm = () => {
+        setTitle('');
+        setAuthor('');
+        setCategory('');
+        setBody('');
+    }
+
+    const createBlog = async (e) => {
+        e.preventDefault();
         try {
             const { error } = await supabase
                 .from('blogs')
@@ -20,7 +28,7 @@ const Page = () => {
                 .single()
 
             setIsCreated(true);
-
+            resetForm();
         } catch (error) {
             console.log(error);
         }
@@ -31,30 +39,29 @@ const Page = () => {
             <Header type='Create Blog' />
             {
                 isCreated &&
-                <div className="alert w-fit">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div className="alert w-fit mt-2">
                     <span>Blog created successfully</span>
                 </div>
             }
-            <div className="flex lg:flex-row md:flex-row sm:flex-col xs:flex-col gap-5 mt-4 pt-8">
+            <div className="flex lg:flex-row md:flex-row sm:flex-col xs:flex-col gap-5 mt-1 pt-4">
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
                     <div>
                         <label className="label">
                             <span className="label-text text-lg">What is your blog title?</span>
                         </label>
-                        <input type="text" placeholder="Blog title" onChange={(e) => setTitle(e.target.value)} className="input input-bordered max-w-xs w-60" />
+                        <input type="text" placeholder="Blog title" value={title} onChange={(e) => setTitle(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text text-lg">What is your name?</span>
                         </label>
-                        <input type="text" placeholder="Author name" onChange={(e) => setAuthor(e.target.value)} className="input input-bordered max-w-xs w-60" />
+                        <input type="text" placeholder="Author name" value={author} onChange={(e) => setAuthor(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div className="w-full max-w-xs">
                         <label className="label">
                             <span className="label-text text-lg">What is your blog category?</span>
                         </label>
-                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered">
+                        <select onChange={(e) => setCategory(e.target.value)} value={category} className="select select-md select-bordered">
                             <option>Select Category</option>
                             <option>Other</option>
                             <option>Music</option>
@@ -70,7 +77,7 @@ const Page = () => {
                         <label className="label">
                             <span className="label-text text-lg">About your blog</span>
                         </label>
-                        <textarea onChange={(e) => setBody(e.target.value)} placeholder="Blog description" className="input input-lg input-bordered max-w-xs w-80 h-60" />
+                        <textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Blog description" className="input input-lg input-bordered max-w-xs w-80 h-60" />
                     </div>
                     <button onClick={createBlog} className='btn btn-neutral w-fit'>CREATE</button>
                 </div>

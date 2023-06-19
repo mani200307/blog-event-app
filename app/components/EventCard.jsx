@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 const EventCard = ({ timeline, name, venue, startDate, time, categ, desc }) => {
     const [day, setDay] = useState();
     const [month, setMonth] = useState("");
+    const [year, setYear] = useState("");
     const [convtime, setConvTime] = useState();
 
     const convertTime = (time) => {
@@ -21,10 +22,12 @@ const EventCard = ({ timeline, name, venue, startDate, time, categ, desc }) => {
 
     useEffect(() => {
         const date = new Date(startDate);
-        const options = { day: 'numeric', month: 'short' };
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
         const formattedDate = date.toLocaleDateString('en-US', options);
-        setDay(formattedDate.split(' ')[1]);
+        setDay(formattedDate.split(' ')[1].replace(',', ''));
         setMonth(formattedDate.split(' ')[0]);
+        setYear(formattedDate.split(' ')[2]);
+
         const resTime = convertTime(time);
         setConvTime(resTime);
     }, [timeline, startDate, time]);
@@ -35,6 +38,7 @@ const EventCard = ({ timeline, name, venue, startDate, time, categ, desc }) => {
                 <div className="text-center tracking-wide">
                     <div className="text-white font-bold text-4xl ">{day}</div>
                     <div className="text-white font-normal text-2xl">{month}</div>
+                    <div className="text-white font-normal text-lg">{year}</div>
                     <div className="text-white font-normal mt-1 text-sm">{convtime}</div>
                 </div>
             </div>

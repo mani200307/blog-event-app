@@ -15,7 +15,11 @@ const Page = () => {
 
     const clearFilter = () => {
         const getData = async () => {
-            const { data, error } = await supabase.from('events').select("*");
+            const { data, error } = await supabase
+                .from('events')
+                .select("*")
+                .order('date', { ascending: true });
+
             setEvents(data);
         };
         getData();
@@ -27,6 +31,7 @@ const Page = () => {
                 .from('events')
                 .select("*")
                 .eq('category', category);
+
             setEvents(data);
         };
         getData();
@@ -38,6 +43,7 @@ const Page = () => {
                 .from('events')
                 .select('*')
                 .order('date', { ascending: true });
+
             setEvents(data);
         };
         getData();
@@ -55,6 +61,7 @@ const Page = () => {
                     .select('*')
                     .lt('date', currentDate)
                     .order('date', { ascending: true });
+
                 setEvents(data);
             };
             getData();
@@ -63,8 +70,9 @@ const Page = () => {
                 const { data, error } = await supabase
                     .from('events')
                     .select('*')
-                    .gt('date', currentDate)
+                    .gte('date', currentDate)
                     .order('date', { ascending: true });
+
                 setEvents(data);
             };
             getData();

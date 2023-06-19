@@ -16,7 +16,17 @@ const Page = () => {
     const [body, setBody] = useState("");
     const [isCreated, setIsCreated] = useState(false);
 
-    const createEvent = async () => {
+    const resetForm = () => {
+        setTitle('');
+        setVenue('');
+        setStartDate(new Date());
+        setTime('');
+        setCategory('');
+        setBody('');
+    }
+
+    const createEvent = async (e) => {
+        e.preventDefault();
         try {
             const { error } = await supabase
                 .from('events')
@@ -24,6 +34,7 @@ const Page = () => {
                 .single()
 
             setIsCreated(true);
+            resetForm();
 
         } catch (error) {
             console.log(error);
@@ -35,30 +46,30 @@ const Page = () => {
             <Header type='Schedule Event' />
             {
                 isCreated &&
-                <div className="alert w-fit">
+                <div className="alert w-fit mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <span>Event created successfully</span>
                 </div>
             }
-            <div className="flex lg:flex-row md:flex-row sm:flex-col xs:flex-col gap-5 mt-4 pt-8">
+            <div className="flex lg:flex-row md:flex-row sm:flex-col xs:flex-col gap-5 mt-2 pt-4">
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
                     <div>
                         <label className="label">
                             <span className="label-text text-lg">What is your event name?</span>
                         </label>
-                        <input type="text" placeholder="Event name" onChange={(e) => setTitle(e.target.value)} className="input input-bordered max-w-xs w-60" />
+                        <input type="text" placeholder="Event name" value={title} onChange={(e) => setTitle(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text text-lg">Where is that happening?</span>
                         </label>
-                        <input type="text" placeholder="Event Venue" onChange={(e) => setVenue(e.target.value)} className="input input-bordered max-w-xs w-60" />
+                        <input type="text" placeholder="Event Venue" value={venue} onChange={(e) => setVenue(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div className="w-full max-w-xs">
                         <label className="label">
                             <span className="label-text text-lg">What is your event category?</span>
                         </label>
-                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered">
+                        <select onChange={(e) => setCategory(e.target.value)} value={category} className="select select-md select-bordered">
                             <option>Select Category</option>
                             <option>Other</option>
                             <option>Music</option>
@@ -75,20 +86,20 @@ const Page = () => {
                             <span className="label-text text-lg">When is that happening?</span>
                         </label>
                         <div className='ms-1'>
-                            <input type='date' className='cursor-pointer bg-inherit' onChange={(e) => setStartDate(e.target.value)} />
+                            <input type='date' value={startDate} className='cursor-pointer bg-inherit' onChange={(e) => setStartDate(e.target.value)} />
                         </div>
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text text-lg">At what time?</span>
                         </label>
-                        <input type="time" placeholder="Event time" onChange={(e) => setTime(e.target.value)} className="input input-bordered cursor-pointer max-w-xs w-60" />
+                        <input type="time" placeholder="Event time" value={time} onChange={(e) => setTime(e.target.value)} className="input input-bordered cursor-pointer max-w-xs w-60" />
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text text-lg">About your event</span>
                         </label>
-                        <textarea onChange={(e) => setBody(e.target.value)} placeholder="Event description" className="input input-lg input-bordered max-w-xs w-80 h-60" />
+                        <textarea onChange={(e) => setBody(e.target.value)} value={body} placeholder="Event description" className="input input-lg input-bordered max-w-xs w-80 h-60" />
                     </div>
                     <button onClick={createEvent} className='btn btn-neutral w-fit'>CREATE</button>
                 </div>
