@@ -31,7 +31,7 @@ const Page = () => {
     }
 
     return (
-        <form className="h-full overflow-x-hidden w-full bg-white flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
+        <form className="h-full overflow-x-hidden w-full flex mt-7 lg:flex-col md:flex-col sm:flex-col xs:flex-col">
             <Header type='Schedule Event' />
             {
                 isCreated &&
@@ -44,21 +44,21 @@ const Page = () => {
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
                     <div>
                         <label className="label">
-                            <span className="label-text text-black text-lg">What is your event name?</span>
+                            <span className="label-text text-lg">What is your event name?</span>
                         </label>
-                        <input type="text" placeholder="Event name" onChange={(e) => setTitle(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="text" placeholder="Event name" onChange={(e) => setTitle(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div>
                         <label className="label">
-                            <span className="label-text text-black text-lg">Where is that happening?</span>
+                            <span className="label-text text-lg">Where is that happening?</span>
                         </label>
-                        <input type="text" placeholder="Event Venue" onChange={(e) => setVenue(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="text" placeholder="Event Venue" onChange={(e) => setVenue(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div className="w-full max-w-xs">
                         <label className="label">
-                            <span className="label-texttext-lg">What is your event category?</span>
+                            <span className="label-text text-lg">What is your event category?</span>
                         </label>
-                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
+                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered">
                             <option>Select Category</option>
                             <option>Other</option>
                             <option>Music</option>
@@ -72,24 +72,23 @@ const Page = () => {
                 <div className="form-control flex-1 flex-col space-y-5 w-full max-w-xs mb-3">
                     <div>
                         <label className="label">
-                            <span className="label-text text-black text-lg">When is that happening?</span>
+                            <span className="label-text text-lg">When is that happening?</span>
                         </label>
                         <div className='ms-1'>
-                            <input type='date' onChange={(e) => setStartDate(e.target.value)} />
-                            {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='bg-gray-200 border p-2 w-32 hover:cursor-pointer' /> */}
+                            <input type='date' className='cursor-pointer bg-inherit' onChange={(e) => setStartDate(e.target.value)} />
                         </div>
                     </div>
                     <div>
                         <label className="label">
-                            <span className="label-text text-black text-lg">At what time?</span>
+                            <span className="label-text text-lg">At what time?</span>
                         </label>
-                        <input type="time" placeholder="Event time" onChange={(e) => setTime(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="time" placeholder="Event time" onChange={(e) => setTime(e.target.value)} className="input input-bordered cursor-pointer max-w-xs w-60" />
                     </div>
                     <div>
                         <label className="label">
                             <span className="label-text text-lg">About your event</span>
                         </label>
-                        <textarea onChange={(e) => setBody(e.target.value)} placeholder="Event description" className="input input-lg input-bordered border-gray-300max-w-xs w-80 h-60" />
+                        <textarea onChange={(e) => setBody(e.target.value)} placeholder="Event description" className="input input-lg input-bordered max-w-xs w-80 h-60" />
                     </div>
                     <button onClick={createEvent} className='btn btn-neutral w-fit'>CREATE</button>
                 </div>

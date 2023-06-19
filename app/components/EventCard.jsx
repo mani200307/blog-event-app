@@ -38,19 +38,19 @@ const EventCard = ({ timeline, name, venue, startDate, time, categ, desc }) => {
                     <div className="text-white font-normal mt-1 text-sm">{convtime}</div>
                 </div>
             </div>
-            <div className="w-96 h-fit xs:w-64 lg:w-11/12 xl:w-full px-1 bg-white py-5 lg:px-2 lg:py-2">
-                <div className="font-semibold text-gray-900 text-2xl text-center lg:text-left px-2">
+            <div className="w-96 h-fit xs:w-64 lg:w-11/12 xl:w-full px-1 py-5 lg:px-2 lg:py-2">
+                <div className="font-semibold text-2xl text-center lg:text-left px-2">
                     {name}
                 </div>
                 <div className="flex ml-1 xs:justify-center lg:justify-between mt-2 xs:gap-2">
-                    <div className="text-black w-fit p-0.5 bg-gray-100 rounded-full font-medium text-xs text-center lg:text-left px-2">
+                    <div className="w-fit p-0.5 bg-base-300 rounded-full font-medium text-xs text-center lg:text-left px-2">
                         {venue}
                     </div>
                     <div className="text-white w-fit p-0.5 bg-gray-500 rounded-full font-medium text-xs text-center lg:text-left px-2">
                         {categ}
                     </div>
                 </div>
-                <div className="text-gray-800 lg:w-96 text-sm pt-1 text-center lg:text-left px-2">
+                <div className="lg:w-96 text-sm pt-1 text-center lg:text-left px-2">
                     {desc}
                 </div>
             </div>

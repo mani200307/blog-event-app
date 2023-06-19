@@ -7,7 +7,7 @@ import EventCard from './EventCard';
 const ActiveEvents = () => {
     const [events, setEvents] = useState([]);
     const [curDate, setCurDate] = useState();
-    const [isLogged, setIsLogged] = useState(""); // Move isLogged declaration here
+    const [isLogged, setIsLogged] = useState("");
 
     useEffect(() => {
         const supabase = createClientComponentClient();

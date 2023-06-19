@@ -40,21 +40,21 @@ const Page = () => {
                 <div className="form-control lg:flex-1 md:flex-1 flex-col space-y-5 w-full max-w-xs">
                     <div>
                         <label className="label">
-                            <span className="label-text text-black text-lg">What is your blog title?</span>
+                            <span className="label-text text-lg">What is your blog title?</span>
                         </label>
-                        <input type="text" placeholder="Blog title" onChange={(e) => setTitle(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="text" placeholder="Blog title" onChange={(e) => setTitle(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div>
                         <label className="label">
-                            <span className="label-text text-black text-lg">What is your name?</span>
+                            <span className="label-text text-lg">What is your name?</span>
                         </label>
-                        <input type="text" placeholder="Author name" onChange={(e) => setAuthor(e.target.value)} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                        <input type="text" placeholder="Author name" onChange={(e) => setAuthor(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
                     <div className="w-full max-w-xs">
                         <label className="label">
-                            <span className="label-texttext-lg">What is your blog category?</span>
+                            <span className="label-text text-lg">What is your blog category?</span>
                         </label>
-                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
+                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered">
                             <option>Select Category</option>
                             <option>Other</option>
                             <option>Music</option>
@@ -70,7 +70,7 @@ const Page = () => {
                         <label className="label">
                             <span className="label-text text-lg">About your blog</span>
                         </label>
-                        <textarea onChange={(e) => setBody(e.target.value)} placeholder="Blog description" className="input input-lg input-bordered border-gray-300max-w-xs w-80 h-60" />
+                        <textarea onChange={(e) => setBody(e.target.value)} placeholder="Blog description" className="input input-lg input-bordered max-w-xs w-80 h-60" />
                     </div>
                     <button onClick={createBlog} className='btn btn-neutral w-fit'>CREATE</button>
                 </div>

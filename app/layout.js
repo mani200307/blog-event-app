@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body data-theme="light" className='h-full w-full flex justify-start'>
+      <body className='h-full w-full flex justify-start'>
         <Sidebar />
         {children}
       </body>

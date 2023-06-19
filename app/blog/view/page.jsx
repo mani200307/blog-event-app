@@ -58,13 +58,13 @@ const Page = () => {
     }, [])
 
     return (
-        <div className="h-screen overflow-x-hidden overflow-scroll bg-white pt-8 px-4 flex-1">
+        <div className="h-screen overflow-x-hidden overflow-scroll pt-8 px-4 flex-1">
             <Header type='Blogs' />
             <div className='flex gap-10 mt-7'>
                 <button onClick={() => window.my_modal_2.showModal()}>
                     <div className="w-10 rounded-full flex gap-2">
                         <Image alt='filter' width={20} height={20} src={pic} /><span
-                            className='no-underline text-black'>Filter</span>
+                            className='no-underline'>Filter</span>
                     </div>
                 </button>
                 <div onClick={clearFilter} className="border-gray-500 bg-gray-400 flex items-center hover:cursor-pointer px-2 rounded-full">
@@ -78,7 +78,7 @@ const Page = () => {
                         <label className="label">
                             <span className="label-texttext-lg">Category</span>
                         </label>
-                        <select onChange={(e) => setCategory(e.target.value)} className="select select-md select-bordered border-gray-300">
+                        <select onChange={(e) => setCategory(e.target.value)} className="select select-sm select-bordered">
                             <option disabled>Select category</option>
                             <option defaultChecked>Other</option>
                             <option>Music</option>

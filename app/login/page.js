@@ -50,11 +50,11 @@ export default function Page() {
                 <label className="label">
                     <span className="label-text text-lg">Email</span>
                 </label>
-                <input name='email' placeholder='Enter you email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                <input name='email' placeholder='Enter you email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
                 <label className="label">
                     <span className="label-text text-lg">Password</span>
                 </label>
-                <input type="password" placeholder='Set a strong password' name="password" onChange={(e) => setPassword(e.target.value)} value={password} className="input input-bordered border-gray-300 max-w-xs w-60" />
+                <input type="password" placeholder='Set a strong password' name="password" onChange={(e) => setPassword(e.target.value)} value={password} className="input input-bordered max-w-xs w-60" />
             </div>
             <button onClick={handleSignIn} className='btn w-28'>Sign in</button>
             <h1 className='text-sm'>New User? <Link href='/signup' className='text-blue-500'>Sign up</Link></h1>

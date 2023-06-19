@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const BlogCard = ({ name, authName, categ, desc }) => {
     return (
-        <div className="cursor-context-menu rounded-md h-fit lg:w-72 md:w-96 sm:w-96 xs:w-72 w-full bg-base-100 shadow-xl">
+        <div className="cursor-context-menu rounded-md h-fit lg:w-72 md:w-96 sm:w-96 xs:w-72 w-full shadow-xl">
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
                 <p>{desc}</p>
