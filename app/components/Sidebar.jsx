@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import { create } from 'zustand';
+import useStore from '../context/store';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
 
 const useActivePageStore = create((set) => ({
     activePage: '',
@@ -13,7 +16,10 @@ const useActivePageStore = create((set) => ({
 const Sidebar = () => {
     const setActivePage = useActivePageStore((state) => state.setActivePage);
     const activePage = useActivePageStore((state) => state.activePage);
+    const supabase = createClientComponentClient()
+    const router = useRouter()
     const [theme, setTheme] = useState('');
+    const { isLogged, setIsLogged } = useStore();
 
     const handleToggle = (e) => {
         if (e.target.checked)
@@ -21,6 +27,10 @@ const Sidebar = () => {
         else
             setTheme('light');
     };
+
+    const delete_cookie = () => {
+        document.cookie = "isLogged" + '=; Path=/; Expires='+new Date()+';';
+    }
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme') || 'light';
@@ -32,7 +42,15 @@ const Sidebar = () => {
         localStorage.setItem('theme', theme);
         document.querySelector('html').setAttribute('data-theme', theme);
     }, [theme]);
-    
+
+    const handleSignOut = async () => {
+        setActivePage('');
+        await supabase.auth.signOut()
+        delete_cookie();
+        setIsLogged('');
+        router.replace('/login');
+    }
+
     return (
         <div className="drawer gap-5 flex w-80 flex-col md:w-1/12 sm:w-1/12 xs:w-1/6 lg:mr-32 md:mr-3 xs:mr-2">
             <div className="drawer lg:drawer-open lg:h-full">
@@ -108,19 +126,13 @@ const Sidebar = () => {
                                 <svg className="swap-off fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" /></svg>
                             </label>
                         </div>
-                        <Link href='/logout'>
-                            <span
-                                className={`text-xl flex items-center justify-center cursor-pointer hover:bg-gray-900 p-2 rounded w-full overflow-hidden whitespace-nowrap }`}
-                                onClick={() => setActivePage('')}
-                            >
-                                <h1>Logout</h1>
-                            </span>
-                        </Link>
+                        <div className={'text-xl flex items-center justify-center cursor-pointer hover:bg-gray-900 p-2 rounded w-full overflow-hidden whitespace-nowrap'} onClick={handleSignOut} >
+                            <h1>Logout</h1>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     )
 }
 

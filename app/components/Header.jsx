@@ -9,32 +9,9 @@ const Header = ({ type }) => {
     const supabase = createClientComponentClient()
     const [isLogged, setIsLogged] = useState("");
 
-    const getCookie = (name) => {
-        var cookieArr = document.cookie.split(";");
-
-        for (var i = 0; i < cookieArr.length; i++) {
-            var cookiePair = cookieArr[i].split("=");
-
-            if (name == cookiePair[0].trim()) {
-                return decodeURIComponent(cookiePair[1]);
-            }
-        }
-
-        return null;
-    }
-
     useEffect(() => {
         const getCurUser = async () => {
-            var isLogged = getCookie("isLogged");
-            try {
-                if (isLogged != "") {
-                    const user = await supabase.auth.getUser()
-                    setIsLogged(user.data.user.email)
-                    console.log(user.data.user.email);
-                }
-            } catch (error) {
-                console.log(error);
-            }
+            setIsLogged(localStorage.getItem('isLogged'));
         }
         getCurUser();
     }, [])

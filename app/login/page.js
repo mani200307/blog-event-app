@@ -4,6 +4,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import useStore from '../context/store'
 
 export default function Page() {
     const [email, setEmail] = useState('')
@@ -11,6 +12,7 @@ export default function Page() {
     const router = useRouter()
     const supabase = createClientComponentClient()
     const [failed, setFailed] = useState(false);
+    const { setIsLogged } = useStore();
 
     const setCookie = (cookieName, cookieValue, expiryDate) => {
         var d = new Date();
@@ -30,8 +32,8 @@ export default function Page() {
         }
         else {
             setCookie("isLogged", "true", new Date());
-            console.log("Success");
-            router.refresh()
+            setIsLogged(email);
+            console.log(data);
             router.replace(`/`)
         }
     }

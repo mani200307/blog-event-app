@@ -1,6 +1,13 @@
-import { create } from "zustand";
+import { create } from 'zustand'
 
-export const useStore = create((set) => ({
-    toggleButton: false,
-    setToggleButton: (toggle) => set((state) => ({ toggleButton: !state.toggleButton }))
-}))
+const useStore = create((set) => ({
+    isLogged: typeof localStorage !== 'undefined' ? localStorage.getItem('isLogged') || '' : '',
+    setIsLogged: (user) => {
+        set(() => ({ isLogged: user }));
+        if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('isLogged', user);
+        }
+    },
+}));
+
+export default useStore;
