@@ -26,7 +26,7 @@ export default function Page() {
 
     useEffect(() => {
         if (isLogged) {
-            router.push('/');
+            // router.push('/');
         }
     }, [isLogged]);
 
@@ -52,7 +52,7 @@ export default function Page() {
                 .eq('email', email);
 
             setIsLogged(data[0].name);
-            router.push('/')
+            // router.push('/')
         }
         setLoading(false);
     }
@@ -91,6 +91,12 @@ export default function Page() {
                         <span>Logged in</span>
                     </div>
                 }
+                {
+                    signed &&
+                    <div>
+                        <Link href='/'><button className='btn btn-ghost capitalize text-lg mt-2'>Goto Home</button></Link>
+                    </div>
+                }
                 <label className="label">
                     <span className="label-text text-lg">Email</span>
                 </label>
@@ -126,7 +132,7 @@ export default function Page() {
                     <button>close</button>
                 </form>
             </dialog>
-            <h1 className='text-sm'>New User? <Link href='/signup' className='text-blue-500'>Sign up</Link></h1>
+            <h1>New User? <Link href='/signup' className='text-blue-500'>Sign up</Link></h1>
         </div>
     )
 }

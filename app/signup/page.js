@@ -112,7 +112,7 @@ export default function Page() {
         <div className="form-control h-screen flex-1 flex-col space-y-5 mt-4">
             <h1 className="text-2xl mt-8">Sign Up</h1>
             {signed && (
-                <div className="alert w-fit">
+                <div className="alert alert-info w-fit">
                     <span>Check your mailbox to confirm signup</span>
                 </div>
             )}
@@ -144,7 +144,7 @@ export default function Page() {
                     Register
                 </button>
             }
-            <h1 className="text-sm">
+            <h1>
                 Already registered? <Link href="/login" className='text-blue-500'>Sign in</Link>
             </h1>
         </div>
