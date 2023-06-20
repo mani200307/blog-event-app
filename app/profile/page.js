@@ -10,6 +10,7 @@ const Page = () => {
   const [email, setEmail] = useState('');
   const [updated, setUpdated] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [errEmail, setErrEmail] = useState('');
   const supabase = createClientComponentClient()
   const { setIsLogged } = useStore();
 
@@ -20,43 +21,63 @@ const Page = () => {
   const resetPassword = async (e) => {
     e.preventDefault();
 
-    try {
-      console.log(email);
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${location.origin}/account/update-password`,
-      });
+    if (errEmail === '') {
+      try {
+        console.log(email);
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${location.origin}/account/update-password`,
+        });
 
-      if (error)
-        throw error;
+        if (error)
+          throw error;
 
-      setIsSent(true);
-    } catch (error) {
-      console.log(error);
+        setIsSent(true);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const { data: { user } } = await supabase.auth.getUser();
-    const userEmail = user.email;
 
-    try {
-      const { error } = await supabase
-        .from('users')
-        .update({ name: name })
-        .eq('email', userEmail);
+    if (name !== '') {
 
-      if (error) {
-        throw error;
+      const { data: { user } } = await supabase.auth.getUser();
+      const userEmail = user.email;
+
+      try {
+        const { error } = await supabase
+          .from('users')
+          .update({ name: name })
+          .eq('email', userEmail);
+
+        if (error) {
+          throw error;
+        }
+
+        setUpdated(true);
+        setIsLogged(name);
       }
+      catch (error) {
+        console.log(error);
+      }
+      resetForm();
+    }
+  }
 
-      setUpdated(true);
-      setIsLogged(name);
+  const validateEmail = (e) => {
+    const { name, value } = e.target;
+
+    var atPos = value.indexOf("@");
+    var dotPos = value.lastIndexOf(".");
+    const valid = atPos > 0 && dotPos > atPos + 1 && dotPos < value.length - 1 && value.trim() !== '';
+    if (!valid) {
+      setErrEmail("Enter a valid email");
+    } else {
+      setErrEmail('');
     }
-    catch (error) {
-      console.log(error);
-    }
-    resetForm();
+    setEmail(value);
   }
 
   return (
@@ -73,10 +94,9 @@ const Page = () => {
         <span className="label-text text-lg">Update Name</span>
       </label>
       <input name='name' placeholder='Enter your name' type="text" onChange={(e) => setName(e.target.value)} value={name} className="input input-bordered max-w-xs w-60" />
-      <button onClick={() => window.my_modal_2.showModal()}>
-        <div className="w-fit">
-          <span className="text-blue-500 w-fit">Reset Password?</span>
-        </div>
+      {name === '' && <span className="text-sm text-red-500 max-w-xs mt-2">Name shouldn't be empty</span>}
+      <button onClick={() => window.my_modal_2.showModal()} className='w-fit'>
+        <span className="text-blue-500 w-fit">Reset Password?</span>
       </button>
       <dialog id="my_modal_2" className="modal">
         <form method="dialog" className="modal-box w-fit flex flex-col">
@@ -90,7 +110,8 @@ const Page = () => {
           <label className="label">
             <span className="label-text text-lg">Email</span>
           </label>
-          <input name='email' placeholder='Enter Email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
+          <input name='email' placeholder='Enter Email' type="email" onChange={validateEmail} value={email} className="input input-bordered max-w-xs w-60" />
+          {errEmail !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errEmail}</span>}
           <button onClick={resetPassword} className="mt-4 w-fit btn">Confirm</button>
         </form>
         <form method="dialog" className="modal-backdrop">

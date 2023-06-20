@@ -1,73 +1,151 @@
 'use client'
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function Page() {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [signed, setSigned] = useState(false);
-    const router = useRouter()
-    const supabase = createClientComponentClient()
+    const [errName, setErrName] = useState('');
+    const [errEmail, setErrEmail] = useState('');
+    const [errPass, setErrPass] = useState('');
+    const router = useRouter();
+    const supabase = createClientComponentClient();
 
     const resetForm = () => {
         setName('');
         setEmail('');
         setPassword('');
-    }
+    };
+
+    const validateForm = (e) => {
+        const { name, value } = e.target;
+
+        if (name === 'name') {
+            if (value.trim() === '') {
+                setErrName("It shouldn't be empty");
+            } else {
+                setErrName('');
+            }
+            setName(value);
+        } else if (name === 'email') {
+            var atPos = value.indexOf("@");
+            var dotPos = value.lastIndexOf(".");
+            const valid = atPos > 0 && dotPos > atPos + 1 && dotPos < value.length - 1 && value.trim() !== '';
+            if (!valid) {
+                setErrEmail("Enter a valid email");
+            } else {
+                setErrEmail('');
+            }
+            setEmail(value);
+        } else if (name === 'password') {
+            const passwordInputValue = value.trim();
+            const uppercaseRegEx = /(?=.*?[A-Z])/;
+            const lowercaseRegEx = /(?=.*?[a-z])/;
+            const digitsRegEx = /(?=.*?[0-9])/;
+            const specialCharRegEx = /(?=.*?[#?!@$%^&*-])/;
+            const minLengthRegEx = /.{8,}/;
+
+            const passwordLength = passwordInputValue.length;
+            const uppercasePassword = uppercaseRegEx.test(passwordInputValue);
+            const lowercasePassword = lowercaseRegEx.test(passwordInputValue);
+            const digitsPassword = digitsRegEx.test(passwordInputValue);
+            const specialCharPassword = specialCharRegEx.test(passwordInputValue);
+            const minLengthPassword = minLengthRegEx.test(passwordInputValue);
+
+            let errMsg = '';
+
+            if (passwordLength === 0) {
+                errMsg = 'Password is empty';
+            } else if (!uppercasePassword) {
+                errMsg = 'At least one Uppercase';
+            } else if (!lowercasePassword) {
+                errMsg = 'At least one Lowercase';
+            } else if (!digitsPassword) {
+                errMsg = 'At least one digit';
+            } else if (!specialCharPassword) {
+                errMsg = 'At least one Special Characters';
+            } else if (!minLengthPassword) {
+                errMsg = 'At least minimum 8 characters';
+            } else {
+                errMsg = '';
+            }
+
+            setErrPass(errMsg);
+            setPassword(value);
+        }
+    };
 
     const handleSignUp = async (e) => {
+        setSigned(false);
         e.preventDefault();
-        await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-                emailRedirectTo: `${location.origin}/auth/callback`,
-            },
-        })
-        try {
-            const { error } = await supabase
-                .from('users')
-                .insert({ name: name, email: email })
-                .single();
+
+        if (!(errName !== '' || errEmail !== '' || errPass !== '')) {
+            await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    emailRedirectTo: `${location.origin}/auth/callback`,
+                },
+            });
+            try {
+                const { error } = await supabase.from('users').insert({ name, email }).single();
+                if (error) {
+                    throw error;
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            router.replace('/');
+            setSigned(true);
+            resetForm();
         }
-        catch(error){
-            console.log(error);
-        }
-        router.refresh()
-        setSigned(true);
-        resetForm();
-    }
+    };
 
     return (
         <div className="form-control h-screen flex-1 flex-col space-y-5 mt-4">
-            <h1 className='text-2xl mt-8'>Sign Up</h1>
-            {
-                signed &&
+            <h1 className="text-2xl mt-8">Sign Up</h1>
+            {signed && (
                 <div className="alert w-fit">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span>Check you mailbox to confirm signup</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>Check your mailbox to confirm signup</span>
                 </div>
-            }
+            )}
             <div>
                 <label className="label">
                     <span className="label-text text-lg">Name</span>
                 </label>
-                <input name='name' placeholder='Enter your name' type="text" onChange={(e) => setName(e.target.value)} value={name} className="input input-bordered max-w-xs w-60" />
+                <div className="flex flex-col">
+                    <input name="name" placeholder="Enter your name" type="text" value={name} onChange={validateForm} className="input input-bordered max-w-xs w-60" />
+                    {errName !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errName}</span>}
+                </div>
                 <label className="label">
                     <span className="label-text text-lg">Email</span>
                 </label>
-                <input name='email' placeholder='Enter your email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
-                <label className="label">
-                    <span className="label-text text-lg">Password</span>
-                </label>
-                <input type="password" placeholder='Set a strong password' name="password" onChange={(e) => setPassword(e.target.value)} value={password} className="input input-bordered max-w-xs w-60" />
+                <div className="flex flex-col">
+                    <input name="email" placeholder="Enter your email" type="email" value={email} onChange={validateForm} className="input input-bordered max-w-xs w-60" />
+                    {errEmail !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errEmail}</span>}
+                </div>
+                <div className="flex flex-col">
+                    <label className="label">
+                        <span className="label-text text-lg">Password</span>
+                    </label>
+                    <input type="password" placeholder="Set a strong password" name="password" onChange={validateForm} value={password} className="input input-bordered max-w-xs w-60" />
+                    {errPass !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errPass}</span>}
+                </div>
             </div>
-            <button onClick={handleSignUp} className='btn w-28'>Register</button>
-            <h1 className='text-sm'>Already registered? <Link href='/login' className='text-blue-500'>Sign in</Link></h1>
+            <button onClick={handleSignUp} className="btn w-28">
+                Register
+            </button>
+            <h1 className="text-sm">
+                Already registered? <Link href="/login">Sign in</Link>
+            </h1>
         </div>
-    )
+    );
 }

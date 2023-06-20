@@ -36,6 +36,7 @@ export default function Page() {
         }
         else {
             setCookie("isLogged", "true", new Date());
+            setFailed(false)
 
             const { data, error } = await supabase
                 .from('users')
@@ -45,12 +46,12 @@ export default function Page() {
             setIsLogged(data[0].name);
             router.replace(`/`)
         }
+        setLoading(false);
     }
 
     const resetPassword = async (e) => {
         e.preventDefault();
         try {
-            console.log(email);
             const { error } = await supabase.auth.resetPasswordForEmail(email, {
                 redirectTo: `${location.origin}/account/update-password`,
             });
@@ -72,17 +73,17 @@ export default function Page() {
                     failed &&
                     <div className="alert alert-error">
                         <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span>Incorrect password</span>
+                        <span>Incorrect email or password</span>
                     </div>
                 }
                 <label className="label">
                     <span className="label-text text-lg">Email</span>
                 </label>
-                <input name='email' placeholder='Enter you email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
+                <input name='email' placeholder='Enter email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
                 <label className="label">
                     <span className="label-text text-lg">Password</span>
                 </label>
-                <input type="password" placeholder='Set a strong password' name="password" onChange={(e) => setPassword(e.target.value)} value={password} className="input input-bordered max-w-xs w-60" />
+                <input type="password" placeholder='Enter password' name="password" onChange={(e) => setPassword(e.target.value)} value={password} className="input input-bordered max-w-xs w-60" />
             </div>
             <button onClick={handleSignIn} className='btn w-28'>Sign in</button>
             <button onClick={() => window.my_modal_2.showModal()}>
@@ -100,10 +101,11 @@ export default function Page() {
                         </div>
                     }
                     <label className="label">
-                        <span className="label-text text-lg">Confirm Email</span>
+                        <span className="label-text text-lg">Confirm to reset password</span>
                     </label>
-                    <input name='email' placeholder='Enter Email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
-                    <button onClick={resetPassword} className="mt-4 w-fit btn">Update</button>
+                    <div className='flex justify-center'>
+                        <button onClick={resetPassword} className="mt-4 w-fit btn">Confirm</button>
+                    </div>
                 </form>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>
