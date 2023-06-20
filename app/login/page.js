@@ -3,7 +3,7 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useStore from '../context/store'
 
 export default function Page() {
@@ -12,7 +12,7 @@ export default function Page() {
     const router = useRouter()
     const supabase = createClientComponentClient()
     const [failed, setFailed] = useState(false);
-    const { setIsLogged } = useStore();
+    const { isLogged, setIsLogged } = useStore();
     const [isSent, setIsSent] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -22,6 +22,12 @@ export default function Page() {
         var expires = "expires=" + d.toUTCString();
         document.cookie = cookieName + "=" + cookieValue + "; " + expires + "; path=/";
     }
+
+    useEffect(() => {
+        if (isLogged) {
+            router.push('/');
+        }
+    }, [isLogged, router]);
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -44,7 +50,7 @@ export default function Page() {
                 .eq('email', email);
 
             setIsLogged(data[0].name);
-            router.push(`/`)
+            router.push('/')
         }
         setLoading(false);
     }

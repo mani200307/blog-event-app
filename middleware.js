@@ -36,6 +36,13 @@ export async function middleware(request) {
                     return NextResponse.redirect(url);
                 }
             }
+            else {
+                if (request.nextUrl.pathname.startsWith("/login")) {
+                    const url = request.nextUrl.clone();
+                    url.pathname = "/";
+                    return NextResponse.redirect(url);
+                }
+            }
         } catch (error) {
             console.log(error);
         }

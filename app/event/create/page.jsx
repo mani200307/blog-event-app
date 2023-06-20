@@ -182,7 +182,9 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
-                <button onClick={createEvent} className='btn btn-neutral w-fit mb-2'>CREATE</button>
+                <div className='flex justify-center'>
+                    <button onClick={createEvent} className='btn btn-neutral w-fit mb-2'>CREATE</button>
+                </div>
             </div>
             {loading && <h1>Loading..</h1>}
         </form>
