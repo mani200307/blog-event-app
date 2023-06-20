@@ -8,12 +8,15 @@ const Page = () => {
     const [password, setPassword] = useState('');
     const [isUpdated, setIsUpdated] = useState(false);
     const [errPass, setErrPass] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const supabase = createClientComponentClient();
 
     const handleReset = async (e) => {
         e.preventDefault();
 
         if (errPass === '') {
+            setLoading(true);
             try {
                 const { error } = await supabase.auth.updateUser({ password: password })
                 if (error)
@@ -23,6 +26,7 @@ const Page = () => {
             catch (error) {
                 console.log(error);
             }
+            setLoading(false);
         }
     }
 
@@ -71,8 +75,8 @@ const Page = () => {
         <div className="form-control h-screen flex-1 flex-col space-y-5 mt-4">
             {
                 isUpdated &&
-                <div className="alert w-fit">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div className="alert alert-success w-fit mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     <span>Password updated successfully</span>
                 </div>
             }
@@ -84,7 +88,9 @@ const Page = () => {
                 <input type="password" placeholder="Set a strong password" name="password" onChange={validateForm} value={password} className="input input-bordered max-w-xs w-60" />
                 {errPass !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errPass}</span>}
             </div>
-            <button onClick={handleReset} className='btn w-28'>Reset</button>
+            {loading ? <span className="loading loading-spinner loading-md"></span> :
+                <button onClick={handleReset} className='btn w-28'>Reset</button>
+            }
         </div>
     )
 }

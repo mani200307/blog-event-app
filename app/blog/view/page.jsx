@@ -12,15 +12,18 @@ const Page = () => {
     const [blogs, setBlogs] = useState([]);
     const [category, setCategory] = useState();
     const [len, setLen] = useState(1);
+    const [loading, setLoading] = useState(false);
     const supabase = createClientComponentClient()
 
     const clearFilter = () => {
         const getData = async () => {
+            setLoading(true)
             const { data, error } = await supabase
                 .from('blogs')
                 .select("*")
                 .order('created_at', { ascending: false });
 
+            setLoading(false)
             setBlogs(data);
             setLen(data.length);
         }
@@ -30,12 +33,14 @@ const Page = () => {
 
     const applyFilter = () => {
         const getData = async () => {
+            setLoading(true);
             const { data, error } = await supabase
                 .from('blogs')
                 .select("*")
                 .eq('category', category)
                 .order('created_at', { ascending: false });
 
+            setLoading(false);
             setBlogs(data);
             setLen(data.length);
         }
@@ -46,11 +51,13 @@ const Page = () => {
     useEffect(() => {
 
         const getData = async () => {
+            setLoading(true);
             const { data, error } = await supabase
                 .from('blogs')
                 .select("*")
                 .order('created_at', { ascending: false });
 
+            setLoading(false);
             setBlogs(data);
             setLen(data.length);
         }
@@ -96,6 +103,7 @@ const Page = () => {
                     <button>close</button>
                 </form>
             </dialog>
+            {loading && <span className="mb-3 mt-1 loading loading-spinner loading-md"></span>}
             <div className="grid mb-3 mt-1 lg:grid-cols-3 lg:gap-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-2">
                 {blogs.map((blog, index) => (
                     <div key={index} className="flex flex-col h-full">

@@ -9,7 +9,7 @@ const Page = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [updated, setUpdated] = useState(false);
-  const [isSent, setIsSent] = useState(false);
+  const [isSent, setIsSent] = useState(true);
   const [errEmail, setErrEmail] = useState('');
   const supabase = createClientComponentClient()
   const { setIsLogged } = useStore();
@@ -103,7 +103,6 @@ const Page = () => {
           {
             isSent &&
             <div className="alert w-fit">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               <span>Check inbox for reset link</span>
             </div>
           }
@@ -112,13 +111,15 @@ const Page = () => {
           </label>
           <input name='email' placeholder='Enter Email' type="email" onChange={validateEmail} value={email} className="input input-bordered max-w-xs w-60" />
           {errEmail !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errEmail}</span>}
-          <button onClick={resetPassword} className="mt-4 w-fit btn">Confirm</button>
+          <div className='flex justify-center'>
+            <button onClick={resetPassword} className="mt-4 w-fit btn btn-neutral">Confirm</button>
+          </div>
         </form>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
         </form>
       </dialog>
-      <button onClick={handleUpdate} className='btn w-28'>Update</button>
+      <button onClick={handleUpdate} className='btn btn-neutral w-28'>Update</button>
     </div>
   )
 }

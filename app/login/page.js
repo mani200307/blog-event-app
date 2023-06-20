@@ -15,6 +15,7 @@ export default function Page() {
     const { isLogged, setIsLogged } = useStore();
     const [isSent, setIsSent] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [signed, setSigned] = useState(false);
 
     const setCookie = (cookieName, cookieValue, expiryDate) => {
         var d = new Date();
@@ -27,7 +28,7 @@ export default function Page() {
         if (isLogged) {
             router.push('/');
         }
-    }, [isLogged, router]);
+    }, [isLogged]);
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -43,6 +44,7 @@ export default function Page() {
         else {
             setCookie("isLogged", "true", new Date());
             setFailed(false)
+            setSigned(true);
 
             const { data, error } = await supabase
                 .from('users')
@@ -77,9 +79,16 @@ export default function Page() {
             <div>
                 {
                     failed &&
-                    <div className="alert alert-error">
+                    <div className="alert alert-error w-fit">
                         <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <span>Incorrect email or password</span>
+                    </div>
+                }
+                {
+                    signed &&
+                    <div className="alert alert-success w-fit">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>Logged in</span>
                     </div>
                 }
                 <label className="label">
@@ -91,7 +100,7 @@ export default function Page() {
                 </label>
                 <input type="password" placeholder='Enter password' name="password" onChange={(e) => setPassword(e.target.value)} value={password} className="input input-bordered max-w-xs w-60" />
             </div>
-            <button onClick={handleSignIn} className='btn w-28'>Sign in</button>
+            {loading ? <span className="loading loading-spinner loading-md"></span> : <button onClick={handleSignIn} className='btn w-28'>Sign in</button>}
             <button onClick={() => window.my_modal_2.showModal()}>
                 <div className="w-fit">
                     <span className="text-blue-500 text-sm w-fit">Forgot Password?</span>
@@ -118,9 +127,6 @@ export default function Page() {
                 </form>
             </dialog>
             <h1 className='text-sm'>New User? <Link href='/signup' className='text-blue-500'>Sign up</Link></h1>
-            {
-                loading && <h1>Loading...</h1>
-            }
         </div>
     )
 }

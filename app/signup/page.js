@@ -13,6 +13,7 @@ export default function Page() {
     const [errName, setErrName] = useState('');
     const [errEmail, setErrEmail] = useState('');
     const [errPass, setErrPass] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const supabase = createClientComponentClient();
 
@@ -85,6 +86,7 @@ export default function Page() {
         e.preventDefault();
 
         if (!(errName !== '' || errEmail !== '' || errPass !== '')) {
+            setLoading(true);
             await supabase.auth.signUp({
                 email,
                 password,
@@ -103,6 +105,7 @@ export default function Page() {
             router.replace('/');
             setSigned(true);
             resetForm();
+            setLoading(false);
         }
     };
 
@@ -111,9 +114,6 @@ export default function Page() {
             <h1 className="text-2xl mt-8">Sign Up</h1>
             {signed && (
                 <div className="alert w-fit">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
                     <span>Check your mailbox to confirm signup</span>
                 </div>
             )}
@@ -140,9 +140,11 @@ export default function Page() {
                     {errPass !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errPass}</span>}
                 </div>
             </div>
-            <button onClick={handleSignUp} className="btn w-28">
-                Register
-            </button>
+            {loading ? <span className="loading loading-spinner loading-md"></span> :
+                <button onClick={handleSignUp} className="btn w-28">
+                    Register
+                </button>
+            }
             <h1 className="text-sm">
                 Already registered? <Link href="/login" className='text-blue-500'>Sign in</Link>
             </h1>

@@ -12,15 +12,18 @@ const Page = () => {
     const [category, setCategory] = useState();
     const supabase = createClientComponentClient();
     const [timeline, setTimeline] = useState("All Events");
+    const [loading, setLoading] = useState(false);
     const [len, setLen] = useState(1);
 
     const clearFilter = () => {
         const getData = async () => {
+            setLoading(true);
             const { data, error } = await supabase
                 .from('events')
                 .select("*")
                 .order('date', { ascending: true });
 
+            setLoading(false);
             setEvents(data);
             setLen(data.length);
         };
@@ -29,11 +32,13 @@ const Page = () => {
 
     const applyFilter = () => {
         const getData = async () => {
+            setLoading(true);
             const { data, error } = await supabase
                 .from('events')
                 .select("*")
                 .eq('category', category);
 
+            setLoading(false);
             setEvents(data);
             setLen(data.length);
         };
@@ -42,11 +47,13 @@ const Page = () => {
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true)
             const { data, error } = await supabase
                 .from('events')
                 .select('*')
                 .order('date', { ascending: true });
 
+            setLoading(false)
             setEvents(data);
             setLen(data.length);
         };
@@ -60,34 +67,41 @@ const Page = () => {
 
         if (timeline === 'Past Events') {
             const getData = async () => {
+                setLoading(true)
                 const { data, error } = await supabase
                     .from('events')
                     .select('*')
                     .lt('date', currentDate)
                     .order('date', { ascending: true });
 
+                setLoading(false)
                 setEvents(data);
                 setLen(data.length);
             };
             getData();
         } else if (timeline === 'Upcoming Events') {
             const getData = async () => {
+                setLoading(true)
                 const { data, error } = await supabase
                     .from('events')
                     .select('*')
                     .gte('date', currentDate)
                     .order('date', { ascending: true });
 
+                setLoading(false)
                 setEvents(data);
                 setLen(data.length);
             };
             getData();
         } else {
             const getData = async () => {
+                setLoading(true)
                 const { data, error } = await supabase
                     .from('events')
                     .select('*')
                     .order('date', { ascending: true });
+
+                setLoading(false)
                 setEvents(data);
                 setLen(data.length);
             };
@@ -138,6 +152,7 @@ const Page = () => {
                     <button>close</button>
                 </form>
             </dialog>
+            {loading && <span className="mb-3 mt-1 loading loading-spinner loading-md"></span>}
             <div className="mt-10 mb-3 space-y-5 gap-2">
                 {events.map((event, index) => (
                     <EventCard

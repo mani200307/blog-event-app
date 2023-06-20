@@ -32,22 +32,26 @@ const Page = () => {
 
         if (name === 'title') {
             if (value.trim() === '') {
-                setErrTitle("It shouldn't be empty");
+                setErrTitle("Title shouldn't be empty");
             } else {
                 setErrTitle('');
             }
             setTitle(value);
         } else if (name === 'author') {
             if (value.trim() === '') {
-                setErrAuthor("It shouldn't be empty");
+                setErrAuthor("Author name shouldn't be empty");
             } else {
                 setErrAuthor('');
             }
             setAuthor(value);
         } else if (name === 'body') {
             if (value.trim() === '') {
-                setErrBody("It shouldn't be empty");
-            } else {
+                setErrBody("Body shouldn't be empty");
+            }
+            else if (value.split(' ').length - 1 < 25) {
+                setErrBody("Write atleast 25 words")
+            }
+            else {
                 setErrBody('');
             }
             setBody(value);
@@ -67,7 +71,7 @@ const Page = () => {
             setAuthor(isLogged);
         }
         else {
-            setErrAuthor("It shouldn't be empty");
+            setErrAuthor("Author name shouldn't be empty");
             setAuthor('');
         }
     }
@@ -96,7 +100,8 @@ const Page = () => {
             <Header type='Create Blog' />
             {
                 isCreated &&
-                <div className="alert w-fit mt-2">
+                <div className="alert alert-success w-fit mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     <span>Blog created successfully</span>
                 </div>
             }
@@ -146,19 +151,18 @@ const Page = () => {
                                 <span className="label-text text-lg">About your blog</span>
                             </label>
                             <div className="flex flex-col">
-                                <textarea name='body' value={body} onChange={validateForm} placeholder="Blog description" className="input input-lg input-bordered max-w-xs w-80 h-60" />
+                                <textarea name='body' value={body} onChange={validateForm} placeholder="Blog description" className="input leading-7 input-lg input-bordered max-w-xs w-80 h-80" />
                                 {errBody !== '' && <span className="text-sm text-red-500 max-w-xs mt-2">{errBody}</span>}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center">
-                    <button onClick={createBlog} className="btn btn-neutral w-fit mb-2 mt-10">
+                {loading ? <span className="loading loading-spinner loading-md mb-2 ms-10 mt-10"></span> :
+                    <button onClick={createBlog} className="btn btn-neutral w-fit mb-2 ms-10 mt-10">
                         CREATE
                     </button>
-                </div>
+                }
             </div>
-            {loading && <h1>Loading..</h1>}
         </form>
     )
 }
