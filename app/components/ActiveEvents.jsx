@@ -19,14 +19,12 @@ const ActiveEvents = () => {
             var getDay = date.toLocaleString("default", { day: "2-digit" });
             var dateFormat = getYear + "-" + getMonth + "-" + getDay;
             setCurDate(dateFormat);
-            console.log(dateFormat);
-
+            
             const { data, error } = await supabase
                 .from('events')
                 .select("*")
                 .eq('date', dateFormat);
 
-            console.log(data);
             setEvents(data);
         };
 
@@ -52,7 +50,6 @@ const ActiveEvents = () => {
                 if (isLogged != "") {
                     const user = await supabase.auth.getUser();
                     setIsLogged(user.data.user.email);
-                    console.log(user.data.user.email);
                 }
             } catch (error) {
                 console.log(error);

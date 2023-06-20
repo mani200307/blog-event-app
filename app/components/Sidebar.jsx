@@ -80,7 +80,7 @@ const Sidebar = () => {
                     <div className="menu flex justify-between p-4 w-60 xs:w-44 h-full bg-black text-white">
                         <div className='flex items-center justify-between'>
                             <div className='flex items-center pl-1 gap-4'>
-                                <Link href="/">
+                                <Link href="/" as="/">
                                     <span
                                         className={`className='font-medium cursor-pointer' }`}
                                         onClick={() => setActivePage('')}
@@ -91,7 +91,7 @@ const Sidebar = () => {
                             </div>
                         </div>
                         <div className='flex flex-col justify-between items-start gap-4 mt-3'>
-                            <Link href="/blog/create">
+                            <Link href="/blog/create" as="/blog/create">
                                 <span
                                     className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'createBlog' ? 'bg-gray-900' : ''
                                         }`}
@@ -100,7 +100,7 @@ const Sidebar = () => {
                                     <h1>Create Blog</h1>
                                 </span>
                             </Link>
-                            <Link href="/blog/view">
+                            <Link href="/blog/view" as='/blog/view'>
                                 <span
                                     className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'viewBlogs' ? 'bg-gray-900' : ''
                                         }`}
@@ -109,7 +109,7 @@ const Sidebar = () => {
                                     <h1>View Blogs</h1>
                                 </span>
                             </Link>
-                            <Link href="/event/create">
+                            <Link href="/event/create" as='/event/create'>
                                 <span
                                     className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-full overflow-hidden whitespace-nowrap ${activePage === 'createEvent' ? 'bg-gray-900' : ''
                                         }`}
@@ -118,7 +118,7 @@ const Sidebar = () => {
                                     <h1>Schedule Event</h1>
                                 </span>
                             </Link>
-                            <Link href="/event/view">
+                            <Link href="/event/view" as='/event/view'>
                                 <span
                                     className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'viewEvents' ? 'bg-gray-900' : ''
                                         }`}
@@ -128,7 +128,7 @@ const Sidebar = () => {
                                 </span>
                             </Link>
                             {logged !== '' && (
-                                <Link href="/profile">
+                                <Link href="/profile" as='/profile'>
                                     <span
                                         className={`text-xl flex items-center cursor-pointer hover:bg-gray-800 p-2 rounded w-36 overflow-hidden whitespace-nowrap ${activePage === 'profile' ? 'bg-gray-900' : ''
                                             }`}

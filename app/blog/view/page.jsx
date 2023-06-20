@@ -11,6 +11,7 @@ const Page = () => {
 
     const [blogs, setBlogs] = useState([]);
     const [category, setCategory] = useState();
+    const [len, setLen] = useState(1);
     const supabase = createClientComponentClient()
 
     const clearFilter = () => {
@@ -21,6 +22,7 @@ const Page = () => {
                 .order('created_at', { ascending: false });
 
             setBlogs(data);
+            setLen(data.length);
         }
 
         getData();
@@ -34,8 +36,8 @@ const Page = () => {
                 .eq('category', category)
                 .order('created_at', { ascending: false });
 
-            console.log(data);
             setBlogs(data);
+            setLen(data.length);
         }
 
         getData();
@@ -49,8 +51,8 @@ const Page = () => {
                 .select("*")
                 .order('created_at', { ascending: false });
 
-            console.log(data);
             setBlogs(data);
+            setLen(data.length);
         }
 
         getData();
@@ -101,6 +103,7 @@ const Page = () => {
                     </div>
                 ))}
             </div>
+            {len == 0 && <h1>No records..</h1>}
         </div>
     )
 }

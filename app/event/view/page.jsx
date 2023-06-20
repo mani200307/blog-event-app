@@ -12,6 +12,7 @@ const Page = () => {
     const [category, setCategory] = useState();
     const supabase = createClientComponentClient();
     const [timeline, setTimeline] = useState("All Events");
+    const [len, setLen] = useState(1);
 
     const clearFilter = () => {
         const getData = async () => {
@@ -21,6 +22,7 @@ const Page = () => {
                 .order('date', { ascending: true });
 
             setEvents(data);
+            setLen(data.length);
         };
         getData();
     };
@@ -33,6 +35,7 @@ const Page = () => {
                 .eq('category', category);
 
             setEvents(data);
+            setLen(data.length);
         };
         getData();
     };
@@ -45,6 +48,7 @@ const Page = () => {
                 .order('date', { ascending: true });
 
             setEvents(data);
+            setLen(data.length);
         };
         getData();
     }, []);
@@ -63,6 +67,7 @@ const Page = () => {
                     .order('date', { ascending: true });
 
                 setEvents(data);
+                setLen(data.length);
             };
             getData();
         } else if (timeline === 'Upcoming Events') {
@@ -74,6 +79,7 @@ const Page = () => {
                     .order('date', { ascending: true });
 
                 setEvents(data);
+                setLen(data.length);
             };
             getData();
         } else {
@@ -83,6 +89,7 @@ const Page = () => {
                     .select('*')
                     .order('date', { ascending: true });
                 setEvents(data);
+                setLen(data.length);
             };
             getData();
         }
@@ -145,6 +152,7 @@ const Page = () => {
                     />
                 ))}
             </div>
+            {len == 0 && <h1>No records..</h1>}
         </div>
     );
 };
