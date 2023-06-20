@@ -26,7 +26,7 @@ export default function Page() {
 
     useEffect(() => {
         if (isLogged) {
-            // router.push('/');
+            router.push('/');
         }
     }, [isLogged]);
 
@@ -52,6 +52,7 @@ export default function Page() {
                 .eq('email', email);
 
             setIsLogged(data[0].name);
+            router.refresh();
             router.push('/')
         }
         setLoading(false);
