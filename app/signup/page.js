@@ -102,7 +102,6 @@ export default function Page() {
             } catch (error) {
                 console.log(error);
             }
-            router.replace('/');
             setSigned(true);
             resetForm();
             setLoading(false);
