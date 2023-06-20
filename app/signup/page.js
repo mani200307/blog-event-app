@@ -29,7 +29,6 @@ export default function Page() {
             },
         })
         try {
-            console.log("called");
             const { error } = await supabase
                 .from('users')
                 .insert({ name: name, email: email })

@@ -13,7 +13,7 @@ const Avatar = () => {
                 </div>
             </div>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow-xl rounded-box">
-                <li><Link href='/logout'>Logout</Link></li>
+                <li><Link href='/profile'>Profile</Link></li>
             </ul>
         </div>
     )
