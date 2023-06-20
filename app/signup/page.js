@@ -6,13 +6,21 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function Page() {
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [signed, setSigned] = useState(false);
     const router = useRouter()
     const supabase = createClientComponentClient()
 
-    const handleSignUp = async () => {
+    const resetForm = () => {
+        setName('');
+        setEmail('');
+        setPassword('');
+    }
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
         await supabase.auth.signUp({
             email,
             password,
@@ -20,8 +28,19 @@ export default function Page() {
                 emailRedirectTo: `${location.origin}/auth/callback`,
             },
         })
+        try {
+            console.log("called");
+            const { error } = await supabase
+                .from('users')
+                .insert({ name: name, email: email })
+                .single();
+        }
+        catch(error){
+            console.log(error);
+        }
         router.refresh()
         setSigned(true);
+        resetForm();
     }
 
     return (
@@ -36,9 +55,13 @@ export default function Page() {
             }
             <div>
                 <label className="label">
+                    <span className="label-text text-lg">Name</span>
+                </label>
+                <input name='name' placeholder='Enter your name' type="text" onChange={(e) => setName(e.target.value)} value={name} className="input input-bordered max-w-xs w-60" />
+                <label className="label">
                     <span className="label-text text-lg">Email</span>
                 </label>
-                <input name='email' placeholder='Enter you email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
+                <input name='email' placeholder='Enter your email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
                 <label className="label">
                     <span className="label-text text-lg">Password</span>
                 </label>

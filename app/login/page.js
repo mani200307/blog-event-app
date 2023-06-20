@@ -32,8 +32,15 @@ export default function Page() {
         }
         else {
             setCookie("isLogged", "true", new Date());
-            setIsLogged(email);
+
+            console.log(email);
+            const { data, error } = await supabase
+                .from('users')
+                .select('*')
+                .eq('email', email);
+
             console.log(data);
+            setIsLogged(data[0].name);
             router.replace(`/`)
         }
     }
