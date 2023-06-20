@@ -52,7 +52,7 @@ export default function Page() {
                 .eq('email', email);
 
             setIsLogged(data[0].name);
-            // router.push('/')
+            router.push('/')
         }
         setLoading(false);
     }
