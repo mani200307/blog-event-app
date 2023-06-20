@@ -44,7 +44,7 @@ export default function Page() {
                 .eq('email', email);
 
             setIsLogged(data[0].name);
-            router.replace(`/`)
+            router.push(`/`)
         }
         setLoading(false);
     }
