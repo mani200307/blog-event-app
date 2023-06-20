@@ -9,7 +9,7 @@ const Page = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [updated, setUpdated] = useState(false);
-  const [isSent, setIsSent] = useState(true);
+  const [isSent, setIsSent] = useState(false);
   const [errEmail, setErrEmail] = useState('');
   const supabase = createClientComponentClient()
   const { setIsLogged } = useStore();
