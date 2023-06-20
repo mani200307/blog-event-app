@@ -19,6 +19,10 @@ const Page = () => {
         setBody('');
     }
 
+    const changeName = () => {
+        // setAuthor('Hello');
+    }
+
     const createBlog = async (e) => {
         e.preventDefault();
         try {
@@ -51,11 +55,12 @@ const Page = () => {
                         </label>
                         <input type="text" placeholder="Blog title" value={title} onChange={(e) => setTitle(e.target.value)} className="input input-bordered max-w-xs w-60" />
                     </div>
-                    <div>
+                    <div className='flex flex-col'>
                         <label className="label">
                             <span className="label-text text-lg">What is your name?</span>
                         </label>
                         <input type="text" placeholder="Author name" value={author} onChange={(e) => setAuthor(e.target.value)} className="input input-bordered max-w-xs w-60" />
+                        <div className='flex gap-2 mt-1'><span className='text-sm'>Same as profile name?</span><input type='checkbox' onChange={changeName}/></div>
                     </div>
                     <div className="w-full max-w-xs">
                         <label className="label">

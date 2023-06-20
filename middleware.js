@@ -25,6 +25,11 @@ export async function middleware(request) {
                     url.pathname = "/login";
                     return NextResponse.redirect(url);
                 }
+                if (request.nextUrl.pathname.startsWith("/profile")) {
+                    const url = request.nextUrl.clone();
+                    url.pathname = "/login";
+                    return NextResponse.redirect(url);
+                }
                 if (request.nextUrl.pathname.startsWith("/event")) {
                     const url = request.nextUrl.clone();
                     url.pathname = "/login";
@@ -43,5 +48,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-    matcher: ['/blog/:path*', '/event/:path*', '/'],
+    matcher: ['/blog/:path*', '/event/:path*', '/profile', '/'],
 }

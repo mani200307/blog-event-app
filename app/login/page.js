@@ -14,6 +14,7 @@ export default function Page() {
     const [failed, setFailed] = useState(false);
     const { setIsLogged } = useStore();
     const [isSent, setIsSent] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const setCookie = (cookieName, cookieValue, expiryDate) => {
         var d = new Date();
@@ -22,7 +23,9 @@ export default function Page() {
         document.cookie = cookieName + "=" + cookieValue + "; " + expires + "; path=/";
     }
 
-    const handleSignIn = async () => {
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        setLoading(true);
         const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password,
@@ -107,6 +110,9 @@ export default function Page() {
                 </form>
             </dialog>
             <h1 className='text-sm'>New User? <Link href='/signup' className='text-blue-500'>Sign up</Link></h1>
+            {
+                loading && <h1>Loading...</h1>
+            }
         </div>
     )
 }
