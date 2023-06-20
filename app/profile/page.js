@@ -94,7 +94,7 @@ const Page = () => {
         <span className="label-text text-lg">Update Name</span>
       </label>
       <input name='name' placeholder='Enter your name' type="text" onChange={(e) => setName(e.target.value)} value={name} className="input input-bordered max-w-xs w-60" />
-      {name === '' && <span className="text-sm text-red-500 max-w-xs mt-2">Name shouldn't be empty</span>}
+      {name === '' && <span className="text-sm text-red-500 max-w-xs mt-2">Name should not be empty</span>}
       <button onClick={() => window.my_modal_2.showModal()} className='w-fit'>
         <span className="text-blue-500 w-fit">Reset Password?</span>
       </button>
