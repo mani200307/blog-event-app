@@ -3,6 +3,7 @@
 import Header from '@/app/components/Header'
 import React, { useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import useStore from '@/app/context/store'
 
 const Page = () => {
     const supabase = createClientComponentClient()
@@ -11,6 +12,7 @@ const Page = () => {
     const [category, setCategory] = useState("")
     const [body, setBody] = useState("")
     const [isCreated, setIsCreated] = useState(false);
+    const { isLogged } = useStore();
 
     const resetForm = () => {
         setTitle('');
@@ -20,7 +22,10 @@ const Page = () => {
     }
 
     const changeName = () => {
-        // setAuthor('Hello');
+        if (!author)
+            setAuthor(isLogged);
+        else
+            setAuthor('');
     }
 
     const createBlog = async (e) => {
@@ -60,7 +65,7 @@ const Page = () => {
                             <span className="label-text text-lg">What is your name?</span>
                         </label>
                         <input type="text" placeholder="Author name" value={author} onChange={(e) => setAuthor(e.target.value)} className="input input-bordered max-w-xs w-60" />
-                        <div className='flex gap-2 mt-1'><span className='text-sm'>Same as profile name?</span><input type='checkbox' onChange={changeName}/></div>
+                        <div className='flex gap-2 mt-1'><span className='text-sm'>Same as profile name?</span><input type='checkbox' onChange={changeName} /></div>
                     </div>
                     <div className="w-full max-w-xs">
                         <label className="label">

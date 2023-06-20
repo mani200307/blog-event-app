@@ -75,7 +75,7 @@ const Page = () => {
       <input name='name' placeholder='Enter your name' type="text" onChange={(e) => setName(e.target.value)} value={name} className="input input-bordered max-w-xs w-60" />
       <button onClick={() => window.my_modal_2.showModal()}>
         <div className="w-fit">
-          <span className="underline w-fit">Reset Password</span>
+          <span className="text-blue-500 w-fit">Reset Password?</span>
         </div>
       </button>
       <dialog id="my_modal_2" className="modal">
@@ -91,7 +91,7 @@ const Page = () => {
             <span className="label-text text-lg">Email</span>
           </label>
           <input name='email' placeholder='Enter Email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} className="input input-bordered max-w-xs w-60" />
-          <button onClick={resetPassword} className="mt-4 w-fit btn">Update</button>
+          <button onClick={resetPassword} className="mt-4 w-fit btn">Confirm</button>
         </form>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
