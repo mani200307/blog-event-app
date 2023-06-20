@@ -120,7 +120,7 @@ const Page = () => {
                     <h1 className="text-xl">Filter</h1>
                     <div className="w-full max-w-xs">
                         <label className="label">
-                            <span className="label-texttext-lg">Category</span>
+                            <span className="label-text text-lg">Category</span>
                         </label>
                         <select onChange={(e) => setCategory(e.target.value)} className="select select-sm select-bordered">
                             <option disabled>Select category</option>
