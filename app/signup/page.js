@@ -144,7 +144,7 @@ export default function Page() {
                 Register
             </button>
             <h1 className="text-sm">
-                Already registered? <Link href="/login">Sign in</Link>
+                Already registered? <Link href="/login" className='text-blue-500'>Sign in</Link>
             </h1>
         </div>
     );
