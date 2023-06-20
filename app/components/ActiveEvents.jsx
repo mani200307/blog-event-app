@@ -8,23 +8,26 @@ const ActiveEvents = () => {
     const [events, setEvents] = useState([]);
     const [curDate, setCurDate] = useState();
     const [isLogged, setIsLogged] = useState("");
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const supabase = createClientComponentClient();
 
         const getData = async () => {
+            setLoading(true)
             const date = new Date();
             var getYear = date.toLocaleString("default", { year: "numeric" });
             var getMonth = date.toLocaleString("default", { month: "2-digit" });
             var getDay = date.toLocaleString("default", { day: "2-digit" });
             var dateFormat = getYear + "-" + getMonth + "-" + getDay;
             setCurDate(dateFormat);
-            
+
             const { data, error } = await supabase
                 .from('events')
                 .select("*")
                 .eq('date', dateFormat);
 
+            setLoading(false)
             setEvents(data);
         };
 
@@ -63,6 +66,7 @@ const ActiveEvents = () => {
             {isLogged && (
                 <div className='flex flex-col gap-2'>
                     <h1 className="text-2xl">Events Active Today</h1>
+                    {loading && <span className="mb-3 mt-1 loading loading-spinner loading-md"></span>}
                     <div className='mt-5 space-y-3'>
                         {events && events.map((event, index) => (
                             curDate === event.date && (
